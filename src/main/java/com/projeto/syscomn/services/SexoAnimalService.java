@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.SexoAnimal;
@@ -15,6 +16,7 @@ import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
 @Service
 public class SexoAnimalService {
 	
+	@Autowired
 	private SexoAnimalRepository sexoAnimalRepository;
 
 	public SexoAnimal findById(Integer id) {

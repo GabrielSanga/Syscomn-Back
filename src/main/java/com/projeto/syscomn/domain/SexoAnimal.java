@@ -12,7 +12,6 @@ import com.projeto.syscomn.domain.dtos.SexoAnimalDTO;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Entity
