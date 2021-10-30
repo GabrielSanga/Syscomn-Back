@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import com.projeto.syscomn.domain.dtos.AssinanteDTO;
-import com.projeto.syscomn.domain.enums.TipoPessoa;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -35,6 +34,7 @@ public class Assinante implements Serializable{
 	@Getter
 	private String nomeAssinante;
 		
+	@Getter
 	private Integer tipoPessoa;
 	
 	@Getter
@@ -50,12 +50,9 @@ public class Assinante implements Serializable{
 		super();
 		this.idAssinante = pAssinanteDTO.getIdAssinante();
 		this.nomeAssinante = pAssinanteDTO.getNomeAssinante();
-		this.tipoPessoa = pAssinanteDTO.getTipoPessoa().getCodigo();
+		this.tipoPessoa = pAssinanteDTO.getTipoPessoa();
 		this.cpfCnpj = pAssinanteDTO.getCpfCnpj();
 	}
 	
-	public TipoPessoa getTipoPessoa() {
-		return TipoPessoa.toEnum(tipoPessoa);
-	}
 		
 }

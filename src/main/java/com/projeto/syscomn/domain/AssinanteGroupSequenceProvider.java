@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.validator.spi.group.DefaultGroupSequenceProvider;
 
+import com.projeto.syscomn.domain.enums.TipoPessoa;
+
 public class AssinanteGroupSequenceProvider implements DefaultGroupSequenceProvider<Assinante>{
 
 	@Override
@@ -13,7 +15,7 @@ public class AssinanteGroupSequenceProvider implements DefaultGroupSequenceProvi
 		groups.add(Assinante.class);
 		
 		if(pAssinante != null) {
-			groups.add(pAssinante.getTipoPessoa().getGroup());
+			groups.add(TipoPessoa.toEnum(pAssinante.getTipoPessoa()).getGroup());
 		}
 		
 		return groups;

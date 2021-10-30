@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.projeto.syscomn.domain.Assinante;
-import com.projeto.syscomn.domain.enums.TipoPessoa;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +21,7 @@ public class AssinanteDTO implements Serializable{
 	@NotBlank(message = "Nome é campo de preenchimento obrigatório!")
 	private String nomeAssinante;
 	
+	@Getter
 	@NotNull(message = "Tipo Pessoa é campo de preenchimento obrigatório!")
 	private Integer tipoPessoa;
 	
@@ -37,12 +37,8 @@ public class AssinanteDTO implements Serializable{
 		super();
 		this.idAssinante = pAssinante.getIdAssinante();
 		this.nomeAssinante = pAssinante.getNomeAssinante();
-		this.tipoPessoa = pAssinante.getTipoPessoa().getCodigo();
+		this.tipoPessoa = pAssinante.getTipoPessoa();
 		this.cpfCnpj = pAssinante.getCpfCnpj();
-	}
-
-	public TipoPessoa getTipoPessoa() {
-		return TipoPessoa.toEnum(tipoPessoa);
 	}
 	
 }
