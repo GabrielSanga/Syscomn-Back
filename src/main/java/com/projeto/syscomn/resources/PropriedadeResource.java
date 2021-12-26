@@ -34,7 +34,7 @@ public class PropriedadeResource {
 		
 		Propriedade oPropriedade = propriedadeService.findById(id);
 		
-		return ResponseEntity.ok().body(new  PropriedadeDTO(oPropriedade));
+		return ResponseEntity.ok().body(new PropriedadeDTO(oPropriedade));
 	}
 	 
 	@GetMapping
