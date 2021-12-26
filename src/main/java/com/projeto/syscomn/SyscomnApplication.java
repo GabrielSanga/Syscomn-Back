@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SyscomnApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SyscomnApplication.class, args);
+		SpringApplication.run(SyscomnApplication.class, args);	
 	}
 
 }
