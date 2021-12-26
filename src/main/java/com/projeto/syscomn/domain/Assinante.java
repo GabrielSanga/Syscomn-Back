@@ -2,11 +2,11 @@ package com.projeto.syscomn.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
@@ -21,7 +21,6 @@ import lombok.Setter;
 
 @Setter
 @Entity
-@Table(name = "Assinante")
 @GroupSequenceProvider(AssinanteGroupSequenceProvider.class)
 public class Assinante implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -40,6 +39,7 @@ public class Assinante implements Serializable{
 	@Getter
 	@CPF(groups = CpfGroup.class)
 	@CNPJ(groups = CnpjGroup.class)
+	@Column(unique = true)
 	private String cpfCnpj;
 	 
 	public Assinante() {
@@ -53,6 +53,5 @@ public class Assinante implements Serializable{
 		this.tipoPessoa = pAssinanteDTO.getTipoPessoa();
 		this.cpfCnpj = pAssinanteDTO.getCpfCnpj();
 	}
-	
 		
 }
