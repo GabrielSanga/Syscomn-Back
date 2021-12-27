@@ -37,9 +37,17 @@ public class FuncionarioService {
 		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO));
 	}
 	
-	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO) {	
-		pFuncionarioDTO.setIdPessoa(0);
+	public Funcionario update(@Valid FuncionarioDTO oFuncionarioDTO, Integer id) {
+		oFuncionarioDTO.setIdPessoa(id);
 		
+		Funcionario oFuncionario = findById(oFuncionarioDTO.getIdPessoa());
+		
+		oFuncionario = newFuncionario(oFuncionarioDTO);
+		
+		return funcionarioRepository.save(oFuncionario);
+	}
+	
+	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO) {			
 		Assinante oAssinante = assinanteService.findById(pFuncionarioDTO.getIdAssinante());
 		
 		if (oAssinante == null) { return null; }
