@@ -1,7 +1,7 @@
 package com.projeto.syscomn.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -41,7 +41,7 @@ public abstract class Pessoa implements Serializable{
 	protected String emailPessoa;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected Date dtaNascimentoPessoa;
+	protected LocalDate dtaNascimentoPessoa;
 	
 	protected String enderecoPessoa;
 	
@@ -66,7 +66,7 @@ public abstract class Pessoa implements Serializable{
 	}
 	
 	public Pessoa(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa, String emailPessoa,
-			Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
 		super();
 		this.idPessoa = idPessoa;

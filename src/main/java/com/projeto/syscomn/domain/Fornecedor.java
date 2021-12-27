@@ -1,10 +1,10 @@
 package com.projeto.syscomn.domain;
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class Fornecedor extends Pessoa{
 	}
 
 	public Fornecedor(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);

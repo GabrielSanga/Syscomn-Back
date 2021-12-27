@@ -25,7 +25,7 @@ public class FuncionarioService {
 	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO) {	
 		pFuncionarioDTO.setIdPessoa(0);
 		
-		Assinante oAssinante = assinanteService.findById(pFuncionarioDTO.getAssinante());
+		Assinante oAssinante = assinanteService.findById(pFuncionarioDTO.getIdAssinante());
 		
 		if (oAssinante == null) { return null; }
 				
