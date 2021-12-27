@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import com.projeto.syscomn.domain.Assinante;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.Funcionario;
 
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class FuncionarioDTO implements Serializable{
 	protected Integer idPessoa;
 	
 	@NotBlank(message = "Nome é campo de preenchimento obrigatório!")
-	protected String nomePessoaa;
+	protected String nomePessoa;
 
 	@NotBlank(message = "CPF/CNPJ é campo de preenchimento obrigatório!")
 	protected String cpfCnpjPessoa;
@@ -29,7 +30,8 @@ public class FuncionarioDTO implements Serializable{
 	@NotBlank(message = "E-mail é campo de preenchimento obrigatório!")
 	protected String emailPessoa;
 
-	@NotBlank(message = "Data de Nascimento é campo de preenchimento obrigatório!")
+	@NotNull(message = "Data de Nascimento é campo de preenchimento obrigatório!")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected Date dtaNascimentoPessoa;
 
 	@NotBlank(message = "Endereço é campo de preenchimento obrigatório!")
@@ -49,25 +51,25 @@ public class FuncionarioDTO implements Serializable{
 	@NotBlank(message = "Senha é campo de preenchimento obrigatório!")
 	protected String senha;
 
-	@NotBlank(message = "Tipo da Pessoa é campo de preenchimento obrigatório!")
+	@NotNull(message = "Tipo da Pessoa é campo de preenchimento obrigatório!")
 	protected Integer tipoPessoa;
 
-	@NotBlank(message = "Assinante é campo de preenchimento obrigatório!")
-	protected Assinante assinante;
+	@NotNull(message = "Assinante é campo de preenchimento obrigatório!")
+	protected Integer assinante;
 	
 	public FuncionarioDTO() {}
 	
 	public FuncionarioDTO(Funcionario pFuncionario){
 		this.idPessoa = pFuncionario.getIdPessoa();
-		this.nomePessoaa = pFuncionario.getNomePessoaa();
+		this.nomePessoa = pFuncionario.getNomePessoa();
 		this.cpfCnpjPessoa = pFuncionario.getCpfCnpjPessoa();
 		this.telefonePessoa = pFuncionario.getTelefonePessoa();
 		this.emailPessoa = pFuncionario.getEmailPessoa();
 		this.dtaNascimentoPessoa = pFuncionario.getDtaNascimentoPessoa();;
 		this.enderecoPessoa = pFuncionario.getEnderecoPessoa();
-		this.statusPessoa = pFuncionario.getStatus();
+		this.statusPessoa = pFuncionario.getStatusPessoa();
 		this.login = pFuncionario.getLogin();
 		this.senha = pFuncionario.getSenha();
-		this.assinante = pFuncionario.getAssinante();
+		this.assinante = pFuncionario.getAssinante().getIdAssinante();
 	}
 }

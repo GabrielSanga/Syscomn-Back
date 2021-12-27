@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public class Fornecedor extends Pessoa{
 	
 	private String status;
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name = "idTipoForncedor")
 	private TipoFornecedor tipoFornecedor;
 
@@ -33,10 +34,10 @@ public class Fornecedor extends Pessoa{
 		super();
 	}
 
-	public Fornecedor(Integer idPessoa, String nomePessoaa, String cpfCnpjPessoa, String telefonePessoa,
+	public Fornecedor(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa,
 			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
-		super(idPessoa, nomePessoaa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
+		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
 	}
 

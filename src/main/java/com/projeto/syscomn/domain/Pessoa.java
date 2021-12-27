@@ -14,6 +14,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +31,7 @@ public abstract class Pessoa implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer idPessoa;
 	
-	protected String nomePessoaa;
+	protected String nomePessoa;
 	
 	@Column(unique = true)
 	protected String cpfCnpjPessoa;
@@ -38,6 +40,7 @@ public abstract class Pessoa implements Serializable{
 	
 	protected String emailPessoa;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected Date dtaNascimentoPessoa;
 	
 	protected String enderecoPessoa;
@@ -62,12 +65,12 @@ public abstract class Pessoa implements Serializable{
 		super();
 	}
 	
-	public Pessoa(Integer idPessoa, String nomePessoaa, String cpfCnpjPessoa, String telefonePessoa, String emailPessoa,
+	public Pessoa(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa, String emailPessoa,
 			Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
 		super();
 		this.idPessoa = idPessoa;
-		this.nomePessoaa = nomePessoaa;
+		this.nomePessoa = nomePessoa;
 		this.cpfCnpjPessoa = cpfCnpjPessoa;
 		this.telefonePessoa = telefonePessoa;
 		this.emailPessoa = emailPessoa;
