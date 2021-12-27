@@ -1,6 +1,8 @@
 package com.projeto.syscomn.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -30,6 +32,14 @@ public class FuncionarioResource {
 		Funcionario oFuncionario = funcionarioService.findById(id);
 				
 		return ResponseEntity.ok().body(new FuncionarioDTO(oFuncionario));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<FuncionarioDTO>> findAll(){
+		List<Funcionario> lstFuncionarios = funcionarioService.findAll();
+		List<FuncionarioDTO> lstFuncionariosDTO = lstFuncionarios.stream().map(x -> new FuncionarioDTO(x)).collect(Collectors.toList());
+				
+		return ResponseEntity.ok().body(lstFuncionariosDTO);
 	}
 	
 	@PostMapping

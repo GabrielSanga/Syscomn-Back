@@ -1,5 +1,6 @@
 package com.projeto.syscomn.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -27,6 +28,10 @@ public class FuncionarioService {
 
 		return oFuncionario.orElseThrow(() -> new ObjectNotFoundException("Funcionário não encontrado! ID: " + id));
 	}
+	
+	public List<Funcionario> findAll() {
+		return funcionarioRepository.findAll();
+	}
 
 	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO) {
 		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO));
@@ -44,7 +49,5 @@ public class FuncionarioService {
 	
 		return oFuncionario;			
 	}
-
-
 
 }
