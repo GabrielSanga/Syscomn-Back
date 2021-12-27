@@ -45,6 +45,7 @@ public class Funcionario extends Pessoa {
 		this.enderecoPessoa = pFuncionarioDTO.getEnderecoPessoa();
 		this.statusPessoa = pFuncionarioDTO.getStatusPessoa();
 		this.rgPessoa = pFuncionarioDTO.getRgPessoa();
+		this.observacaoPessoa = pFuncionarioDTO.getObservacaoPessoa();
 		this.login = pFuncionarioDTO.getLogin();
 		this.senha = pFuncionarioDTO.getSenha();
 		this.tipoPessoa = pFuncionarioDTO.getTipoPessoa();
