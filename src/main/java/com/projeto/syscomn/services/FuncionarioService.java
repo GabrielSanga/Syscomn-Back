@@ -47,6 +47,12 @@ public class FuncionarioService {
 		return funcionarioRepository.save(oFuncionario);
 	}
 	
+	public void delete(Integer id) {
+		Funcionario oFuncionario = findById(id);
+		
+		funcionarioRepository.deleteById(oFuncionario.getIdPessoa());
+	}
+	
 	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO) {			
 		Assinante oAssinante = assinanteService.findById(pFuncionarioDTO.getIdAssinante());
 		
