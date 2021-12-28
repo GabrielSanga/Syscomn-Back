@@ -4,7 +4,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.interfaces.CnpjGroup;
+import com.projeto.syscomn.interfaces.CpfGroup;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +32,11 @@ public class Administrador extends Pessoa{
 		super();
 	}
 
-	public Administrador(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
-			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
+	public Administrador(Integer idPessoa, String nomePessoa,
+			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
+			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
+			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
+			Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
 	}

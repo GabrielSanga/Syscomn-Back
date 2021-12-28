@@ -14,7 +14,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.interfaces.CnpjGroup;
+import com.projeto.syscomn.interfaces.CpfGroup;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +30,7 @@ import lombok.Setter;
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
 @DiscriminatorColumn(name="Tipo")
+@GroupSequenceProvider(PessoaGroupSequenceProvider.class)
 public abstract class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,6 +40,8 @@ public abstract class Pessoa implements Serializable{
 	
 	protected String nomePessoa;
 	
+	@CPF(groups = CpfGroup.class)
+	@CNPJ(groups = CnpjGroup.class)
 	@Column(unique = true)
 	protected String cpfCnpjPessoa;
 	
@@ -60,14 +69,16 @@ public abstract class Pessoa implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "idAssinante")
 	protected Assinante assinante;
-
+	
 	public Pessoa() {
 		super();
 	}
-	
-	public Pessoa(Integer idPessoa, String nomePessoa, String cpfCnpjPessoa, String telefonePessoa, String emailPessoa,
-			LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
-			String observacaoPessoa, String login, String senha, Integer tipoPessoa, Assinante assinante) {
+
+	public Pessoa(Integer idPessoa, String nomePessoa,
+			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
+			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
+			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
+			Assinante assinante) {
 		super();
 		this.idPessoa = idPessoa;
 		this.nomePessoa = nomePessoa;
