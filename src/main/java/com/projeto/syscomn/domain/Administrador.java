@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.domain.dtos.AdministradorDTO;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -39,6 +40,26 @@ public class Administrador extends Pessoa{
 			Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
+	}
+	
+	public Administrador(AdministradorDTO pAdministadorDTO) {
+		super();
+		this.idPessoa = pAdministadorDTO.getIdPessoa();
+		this.nomePessoa = pAdministadorDTO.getNomePessoa();
+		this.cpfCnpjPessoa = pAdministadorDTO.getCpfCnpjPessoa();
+		this.telefonePessoa = pAdministadorDTO.getTelefonePessoa();
+		this.emailPessoa = pAdministadorDTO.getEmailPessoa();
+		this.dtaNascimentoPessoa = pAdministadorDTO.getDtaNascimentoPessoa();;
+		this.enderecoPessoa = pAdministadorDTO.getEnderecoPessoa();
+		this.statusPessoa = pAdministadorDTO.getStatusPessoa();
+		this.rgPessoa = pAdministadorDTO.getRgPessoa();
+		this.observacaoPessoa = pAdministadorDTO.getObservacaoPessoa();
+		this.login = pAdministadorDTO.getLogin();
+		this.senha = pAdministadorDTO.getSenha();
+		this.tipoPessoa = pAdministadorDTO.getTipoPessoa();
+		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
+		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
+		this.status = pAdministadorDTO.getStatus();
 	}
 		
 }
