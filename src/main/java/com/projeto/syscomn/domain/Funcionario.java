@@ -59,6 +59,7 @@ public class Funcionario extends Pessoa {
 		this.dtaAdmissao = pFuncionarioDTO.getDtaAdmissao();
 		this.dtaDemissao= pFuncionarioDTO.getDtaDemissao();
 		this.NIS = pFuncionarioDTO.getNIS();
+		this.assinante = new Assinante();
 	}
 
 }	

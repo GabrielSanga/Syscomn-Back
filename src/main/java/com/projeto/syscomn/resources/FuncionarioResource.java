@@ -66,4 +66,5 @@ public class FuncionarioResource {
 				
 		return ResponseEntity.noContent().build();
 	}
+	
 }

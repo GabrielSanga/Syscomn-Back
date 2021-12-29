@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.projeto.syscomn.domain.dtos.FornecedorDTO;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -47,6 +48,30 @@ public class Fornecedor extends Pessoa{
 			Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
+	}
+	
+	public Fornecedor(FornecedorDTO pFornecedorDTO) {
+		super();
+		this.idPessoa = pFornecedorDTO.getIdPessoa();
+		this.nomePessoa = pFornecedorDTO.getNomePessoa();
+		this.cpfCnpjPessoa = pFornecedorDTO.getCpfCnpjPessoa();
+		this.telefonePessoa = pFornecedorDTO.getTelefonePessoa();
+		this.emailPessoa = pFornecedorDTO.getEmailPessoa();
+		this.dtaNascimentoPessoa = pFornecedorDTO.getDtaNascimentoPessoa();;
+		this.enderecoPessoa = pFornecedorDTO.getEnderecoPessoa();
+		this.statusPessoa = pFornecedorDTO.getStatusPessoa();
+		this.rgPessoa = pFornecedorDTO.getRgPessoa();
+		this.observacaoPessoa = pFornecedorDTO.getObservacaoPessoa();
+		this.login = pFornecedorDTO.getLogin();
+		this.senha = pFornecedorDTO.getSenha();
+		this.tipoPessoa = pFornecedorDTO.getTipoPessoa();
+		this.razaoSocial = pFornecedorDTO.getRazaoSocial();
+		this.nomeFantasia = pFornecedorDTO.getNomeFantasia();
+		this.inscricaoEstadual = pFornecedorDTO.getInscricaoEstadual();
+		this.cnae = pFornecedorDTO.getCnae();
+		this.status = pFornecedorDTO.getStatus();
+		this.assinante = new Assinante();
+		this.tipoFornecedor = new TipoFornecedor();
 	}
 
 }

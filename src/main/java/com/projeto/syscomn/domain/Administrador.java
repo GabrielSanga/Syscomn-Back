@@ -60,6 +60,7 @@ public class Administrador extends Pessoa{
 		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
 		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
 		this.status = pAdministadorDTO.getStatus();
+		this.assinante = new Assinante();
 	}
 		
 }
