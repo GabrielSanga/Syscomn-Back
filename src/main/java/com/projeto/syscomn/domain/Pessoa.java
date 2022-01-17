@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
@@ -65,6 +67,10 @@ public abstract class Pessoa implements Serializable{
 	protected String senha;
 	
 	protected Integer tipoPessoa;
+	
+    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] fotoPessoa;
 	
 	@ManyToOne
 	@JoinColumn(name = "idAssinante")

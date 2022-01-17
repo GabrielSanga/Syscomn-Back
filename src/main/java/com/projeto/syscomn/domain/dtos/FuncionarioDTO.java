@@ -16,15 +16,17 @@ import lombok.Setter;
 public class FuncionarioDTO extends PessoaDTO{
 	private static final long serialVersionUID = 1L;
 	
-	@NotBlank(message = "NIS é campo de preenchimento obrigatório!")
-	private String NIS;
-	
 	@NotNull(message = "Data de Admissão é campo de preenchimento obrigatório!")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaAdmissao;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaDemissao;
+	
+	@NotBlank(message = "NIS é campo de preenchimento obrigatório!")
+	private String NIS;
+	
+	private String status;
 	
 	public FuncionarioDTO() { 
 		super();
@@ -51,6 +53,7 @@ public class FuncionarioDTO extends PessoaDTO{
 		this.dtaAdmissao = pFuncionario.getDtaAdmissao();
 		this.dtaDemissao= pFuncionario.getDtaDemissao();
 		this.NIS = pFuncionario.getNIS();
+		this.status = pFuncionario.getStatus();
 	}
 	
 }

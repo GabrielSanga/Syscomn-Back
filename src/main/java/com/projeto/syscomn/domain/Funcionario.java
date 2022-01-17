@@ -29,6 +29,8 @@ public class Funcionario extends Pessoa {
 
 	private String NIS;
 	
+	private String status;
+	
 	public Funcionario() {
 		super();
 	}
@@ -59,6 +61,7 @@ public class Funcionario extends Pessoa {
 		this.dtaAdmissao = pFuncionarioDTO.getDtaAdmissao();
 		this.dtaDemissao= pFuncionarioDTO.getDtaDemissao();
 		this.NIS = pFuncionarioDTO.getNIS();
+		this.status = pFuncionarioDTO.getStatus();
 		this.assinante = new Assinante();
 	}
 

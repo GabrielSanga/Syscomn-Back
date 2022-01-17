@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.projeto.syscomn.domain.Assinante;
 import com.projeto.syscomn.domain.Funcionario;
@@ -33,7 +34,13 @@ public class FuncionarioService {
 		return funcionarioRepository.findAll();
 	}
 
-	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO) {
+	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO, MultipartFile fotoPessoa) {
+		try {
+			pFuncionarioDTO.setFotoPessoa(fotoPessoa.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO));
 	}
 	

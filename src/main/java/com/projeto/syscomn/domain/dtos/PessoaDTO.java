@@ -59,6 +59,8 @@ public class PessoaDTO implements Serializable{
 
 	@NotNull(message = "Tipo da Pessoa é campo de preenchimento obrigatório!")
 	protected Integer tipoPessoa;
+	
+    private byte[] fotoPessoa;
 
 	@NotNull(message = "Assinante é campo de preenchimento obrigatório!")
 	protected Integer idAssinante;
