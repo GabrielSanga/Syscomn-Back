@@ -1,6 +1,7 @@
 package com.projeto.syscomn.domain.dtos;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
@@ -40,7 +41,7 @@ public class AdministradorDTO extends PessoaDTO{
 		this.statusPessoa = pAdministador.getStatusPessoa();
 		this.rgPessoa = pAdministador.getRgPessoa();
 		this.observacaoPessoa = pAdministador.getObservacaoPessoa();
-		this.login = pAdministador.getLogin();
+		this.userName = pAdministador.getUserName();
 		this.senha = pAdministador.getSenha();
 		this.tipoPessoa = pAdministador.getTipoPessoa();
 		this.idAssinante = pAdministador.getAssinante().getIdAssinante();
@@ -49,6 +50,7 @@ public class AdministradorDTO extends PessoaDTO{
 		this.dtaAdmissao = pAdministador.getDtaAdmissao();
 		this.dtaDemissao= pAdministador.getDtaDemissao();
 		this.status = pAdministador.getStatus();
+		this.perfis = pAdministador.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 	
 }

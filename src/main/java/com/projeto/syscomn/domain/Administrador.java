@@ -1,6 +1,9 @@
 package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 
@@ -9,6 +12,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.dtos.AdministradorDTO;
+import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -31,15 +35,17 @@ public class Administrador extends Pessoa{
 
 	public Administrador() {
 		super();
+		super.addPerfil(Perfil.ADMIN);
 	}
-
+	
 	public Administrador(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
-			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
-			Assinante assinante) {
+			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
+			byte[] fotoPessoa, Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
+				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa, assinante);
+		super.addPerfil(Perfil.ADMIN);
 	}
 	
 	public Administrador(AdministradorDTO pAdministadorDTO) {
@@ -54,13 +60,14 @@ public class Administrador extends Pessoa{
 		this.statusPessoa = pAdministadorDTO.getStatusPessoa();
 		this.rgPessoa = pAdministadorDTO.getRgPessoa();
 		this.observacaoPessoa = pAdministadorDTO.getObservacaoPessoa();
-		this.login = pAdministadorDTO.getLogin();
+		this.userName = pAdministadorDTO.getUserName();
 		this.senha = pAdministadorDTO.getSenha();
 		this.tipoPessoa = pAdministadorDTO.getTipoPessoa();
 		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
 		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
 		this.status = pAdministadorDTO.getStatus();
 		this.assinante = new Assinante();
+		this.perfis = pAdministadorDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 		
 }

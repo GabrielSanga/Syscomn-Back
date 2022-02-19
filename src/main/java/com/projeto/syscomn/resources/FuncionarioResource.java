@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.syscomn.domain.Funcionario;
@@ -47,15 +45,17 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(lstFuncionariosDTO);
 	}
 	
-	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO oFuncionarioDTO, @RequestParam("fotoPessoa") MultipartFile fotoPessoa){
-		Funcionario oFuncionario = funcionarioService.create(oFuncionarioDTO, fotoPessoa);
+	@PostMapping
+	public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO oFuncionarioDTO){
+		
+		Funcionario oFuncionario = funcionarioService.create(oFuncionarioDTO);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idFuncionario}").buildAndExpand(oFuncionario.getIdPessoa()).toUri();
 
 		return ResponseEntity.created(uri).build();	
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<FuncionarioDTO> update(@Valid @RequestBody FuncionarioDTO oFuncionarioDTO, @PathVariable Integer id){
 		Funcionario oFuncionario = funcionarioService.update(oFuncionarioDTO, id);
@@ -63,6 +63,7 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(new FuncionarioDTO(oFuncionario));
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<FuncionarioDTO> delete(@PathVariable Integer id){
 		funcionarioService.delete(id);

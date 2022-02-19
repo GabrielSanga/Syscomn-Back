@@ -1,7 +1,7 @@
 package com.projeto.syscomn.domain;
 
-
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -40,16 +40,16 @@ public class Fornecedor extends Pessoa{
 	public Fornecedor() {
 		super();
 	}
-
+	
 	public Fornecedor(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
-			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
-			Assinante assinante) {
+			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
+			byte[] fotoPessoa, Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
+				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa, assinante);
 	}
-	
+		
 	public Fornecedor(FornecedorDTO pFornecedorDTO) {
 		super();
 		this.idPessoa = pFornecedorDTO.getIdPessoa();
@@ -62,7 +62,7 @@ public class Fornecedor extends Pessoa{
 		this.statusPessoa = pFornecedorDTO.getStatusPessoa();
 		this.rgPessoa = pFornecedorDTO.getRgPessoa();
 		this.observacaoPessoa = pFornecedorDTO.getObservacaoPessoa();
-		this.login = pFornecedorDTO.getLogin();
+		this.userName = pFornecedorDTO.getUserName();
 		this.senha = pFornecedorDTO.getSenha();
 		this.tipoPessoa = pFornecedorDTO.getTipoPessoa();
 		this.razaoSocial = pFornecedorDTO.getRazaoSocial();

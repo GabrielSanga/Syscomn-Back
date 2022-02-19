@@ -1,6 +1,9 @@
 package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 
@@ -9,6 +12,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
+import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -33,17 +37,19 @@ public class Funcionario extends Pessoa {
 	
 	public Funcionario() {
 		super();
+		addPerfil(Perfil.FUNCIONARIO);
 	}
 
 	public Funcionario(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
-			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
-			Assinante assinante) {
+			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
+			byte[] fotoPessoa, Assinante assinante) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, login, senha, tipoPessoa, assinante);
+				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa, assinante);
+		addPerfil(Perfil.FUNCIONARIO);
 	}
-	
+		
 	public Funcionario(FuncionarioDTO pFuncionarioDTO){
 		this.idPessoa = pFuncionarioDTO.getIdPessoa();
 		this.nomePessoa = pFuncionarioDTO.getNomePessoa();
@@ -55,7 +61,7 @@ public class Funcionario extends Pessoa {
 		this.statusPessoa = pFuncionarioDTO.getStatusPessoa();
 		this.rgPessoa = pFuncionarioDTO.getRgPessoa();
 		this.observacaoPessoa = pFuncionarioDTO.getObservacaoPessoa();
-		this.login = pFuncionarioDTO.getLogin();
+		this.userName = pFuncionarioDTO.getUserName();
 		this.senha = pFuncionarioDTO.getSenha();
 		this.tipoPessoa = pFuncionarioDTO.getTipoPessoa();
 		this.dtaAdmissao = pFuncionarioDTO.getDtaAdmissao();
@@ -63,6 +69,8 @@ public class Funcionario extends Pessoa {
 		this.NIS = pFuncionarioDTO.getNIS();
 		this.status = pFuncionarioDTO.getStatus();
 		this.assinante = new Assinante();
+		this.perfis = pFuncionarioDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
+
 
 }	

@@ -1,8 +1,8 @@
 package com.projeto.syscomn.domain.dtos;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,7 +23,7 @@ public class FuncionarioDTO extends PessoaDTO{
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaDemissao;
 	
-	@NotBlank(message = "NIS é campo de preenchimento obrigatório!")
+	@NotNull(message = "NIS é campo de preenchimento obrigatório!")
 	private String NIS;
 	
 	private String status;
@@ -44,7 +44,7 @@ public class FuncionarioDTO extends PessoaDTO{
 		this.statusPessoa = pFuncionario.getStatusPessoa();
 		this.rgPessoa = pFuncionario.getRgPessoa();
 		this.observacaoPessoa = pFuncionario.getObservacaoPessoa();
-		this.login = pFuncionario.getLogin();
+		this.userName = pFuncionario.getUserName();
 		this.senha = pFuncionario.getSenha();
 		this.tipoPessoa = pFuncionario.getTipoPessoa();
 		this.idAssinante = pFuncionario.getAssinante().getIdAssinante();
@@ -54,6 +54,8 @@ public class FuncionarioDTO extends PessoaDTO{
 		this.dtaDemissao= pFuncionario.getDtaDemissao();
 		this.NIS = pFuncionario.getNIS();
 		this.status = pFuncionario.getStatus();
+		this.perfis = pFuncionario.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+
 	}
 	
 }

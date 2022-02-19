@@ -49,7 +49,7 @@ public class FornecedorDTO extends PessoaDTO{
 		this.statusPessoa = pFornecedor.getStatusPessoa();
 		this.rgPessoa = pFornecedor.getRgPessoa();
 		this.observacaoPessoa = pFornecedor.getObservacaoPessoa();
-		this.login = pFornecedor.getLogin();
+		this.userName = pFornecedor.getUserName();
 		this.senha = pFornecedor.getSenha();
 		this.tipoPessoa = pFornecedor.getTipoPessoa();
 		this.idAssinante = pFornecedor.getAssinante().getIdAssinante();

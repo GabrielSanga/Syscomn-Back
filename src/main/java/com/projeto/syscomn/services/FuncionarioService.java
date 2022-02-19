@@ -6,8 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.projeto.syscomn.domain.Assinante;
 import com.projeto.syscomn.domain.Funcionario;
@@ -24,6 +24,9 @@ public class FuncionarioService {
 	@Autowired
 	private AssinanteService assinanteService;
 	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	public Funcionario findById(Integer id) {
 		Optional<Funcionario> oFuncionario = funcionarioRepository.findById(id);
 
@@ -34,13 +37,7 @@ public class FuncionarioService {
 		return funcionarioRepository.findAll();
 	}
 
-	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO, MultipartFile fotoPessoa) {
-		try {
-			pFuncionarioDTO.setFotoPessoa(fotoPessoa.getBytes());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO) {		
 		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO));
 	}
 	
@@ -67,6 +64,8 @@ public class FuncionarioService {
 				
 		Funcionario oFuncionario = new Funcionario(pFuncionarioDTO);
 		oFuncionario.setAssinante(oAssinante);
+		//Realizando a criptografia da senha
+		oFuncionario.setSenha(encoder.encode(oFuncionario.getSenha()));
 	
 		return oFuncionario;			
 	}

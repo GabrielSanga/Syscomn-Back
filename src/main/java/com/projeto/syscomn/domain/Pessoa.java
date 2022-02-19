@@ -1,11 +1,17 @@
 package com.projeto.syscomn.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +27,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -52,7 +59,7 @@ public abstract class Pessoa implements Serializable{
 	protected String emailPessoa;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate dtaNascimentoPessoa;
+	protected Date dtaNascimentoPessoa;
 	
 	protected String enderecoPessoa;
 	
@@ -62,11 +69,15 @@ public abstract class Pessoa implements Serializable{
 	
 	protected String observacaoPessoa;
 	
-	protected String login;	
+	protected String userName;	
 	
 	protected String senha;
 	
 	protected Integer tipoPessoa;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	protected Set<Integer> perfis = new HashSet<>();
 	
     @Lob
     @Type(type = "org.hibernate.type.ImageType")
@@ -82,9 +93,9 @@ public abstract class Pessoa implements Serializable{
 
 	public Pessoa(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa,
-			String rgPessoa, String observacaoPessoa, String login, String senha, Integer tipoPessoa,
-			Assinante assinante) {
+			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
+			byte[] fotoPessoa, Assinante assinante) {
 		super();
 		this.idPessoa = idPessoa;
 		this.nomePessoa = nomePessoa;
@@ -96,10 +107,20 @@ public abstract class Pessoa implements Serializable{
 		this.statusPessoa = statusPessoa;
 		this.rgPessoa = rgPessoa;
 		this.observacaoPessoa = observacaoPessoa;
-		this.login = login;
+		this.userName = userName;
 		this.senha = senha;
 		this.tipoPessoa = tipoPessoa;
+		this.perfis = perfis;
+		this.fotoPessoa = fotoPessoa;
 		this.assinante = assinante;
+	}
+	
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(perfil.getCodigo());
 	}
 	
 }
