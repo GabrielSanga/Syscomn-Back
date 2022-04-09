@@ -6,10 +6,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.Administrador;
-import com.projeto.syscomn.domain.Assinante;
 import com.projeto.syscomn.domain.dtos.AdministradorDTO;
 import com.projeto.syscomn.repositores.AdministradorRepository;
 import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
@@ -19,9 +19,9 @@ public class AdministradorService {
 	
 	@Autowired
 	private AdministradorRepository administradorRepository;
-
+	
 	@Autowired
-	private AssinanteService assinanteService;
+	private BCryptPasswordEncoder encoder;
 	
 	public Administrador findById(Integer id) {
 		Optional<Administrador> oAdministrador = administradorRepository.findById(id);
@@ -53,14 +53,12 @@ public class AdministradorService {
 		administradorRepository.deleteById(oAdministrador.getIdPessoa());
 	}
 	
-	private Administrador newAdministrador(AdministradorDTO pAdministradorDTO) {			
-		Assinante oAssinante = assinanteService.findById(pAdministradorDTO.getIdAssinante());
-		
-		if (oAssinante == null) { return null; }
-				
+	private Administrador newAdministrador(AdministradorDTO pAdministradorDTO) {					
 		Administrador oAdministrador = new Administrador(pAdministradorDTO);
-		oAdministrador.setAssinante(oAssinante);
+		//Realizando a criptografia da senha
+		oAdministrador.setSenha(encoder.encode(oAdministrador.getSenha()));
 	
 		return oAdministrador;			
 	}
+	
 }

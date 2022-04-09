@@ -1,7 +1,6 @@
 package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,7 @@ import lombok.Setter;
 public class Administrador extends Pessoa{
 	private static final long serialVersionUID = 1L;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private LocalDate dtaAdmissao;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -40,11 +39,11 @@ public class Administrador extends Pessoa{
 	
 	public Administrador(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
-			byte[] fotoPessoa, Assinante assinante) {
+			byte[] fotoPessoa) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa, assinante);
+				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa);
 		super.addPerfil(Perfil.ADMIN);
 	}
 	
@@ -66,8 +65,8 @@ public class Administrador extends Pessoa{
 		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
 		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
 		this.status = pAdministadorDTO.getStatus();
-		this.assinante = new Assinante();
 		this.perfis = pAdministadorDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		super.addPerfil(Perfil.ADMIN);
 	}
 		
 }

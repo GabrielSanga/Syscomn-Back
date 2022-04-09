@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.POST, "/login").permitAll() //Especifica uma URL em específico, bloqueando ou liberando
 			.antMatchers(HttpMethod.POST, "/administrador").permitAll()
 			.anyRequest().authenticated() //Qualquer outra requisição precisa ser autenticada
-			.and().csrf().disable()
+			.and().cors().and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); //Desabilitando a criação de sessão de usuário ao efetuar login
 		
 		//Adicionando nosso tratamento personalizado para o security

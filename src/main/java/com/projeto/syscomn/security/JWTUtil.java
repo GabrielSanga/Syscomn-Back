@@ -2,8 +2,14 @@ package com.projeto.syscomn.security;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.projeto.syscomn.domain.dtos.UsuarioDTO;
+import com.projeto.syscomn.repositores.PessoaRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,6 +23,9 @@ public class JWTUtil {
 	
 	@Value("${jwt.secret}")
 	private String secret; //-> Chave do Token definida nas properties
+	
+	@Autowired
+	private PessoaRepository pessoaRepository;
 	
 	/*Método responsável por gerar o Token que será enviado no retorno da requisição*/
 	public String generateToken(String username) {
@@ -63,6 +72,25 @@ public class JWTUtil {
 		}
 		
 		return null;
+	}
+	
+	public String recuperaToken(HttpServletRequest request) {
+		String token = request.getHeader("Authorization");
+		
+		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+			return null;
+		}
+		
+		return token.substring(7, token.length());
+	}
+	
+	//Função responsável por devolver o usuário logado no sistema atrvés do token
+	public UsuarioDTO getUsuarioLogado(HttpServletRequest request) {
+		String sToken = recuperaToken(request);
+		
+		String sUserName = getUserName(sToken);
+		
+		return new UsuarioDTO(pessoaRepository.findByUserName(sUserName).get());
 	}
 
 }

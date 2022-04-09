@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.Funcionario;
 
 import lombok.Getter;
@@ -17,13 +16,10 @@ public class FuncionarioDTO extends PessoaDTO{
 	private static final long serialVersionUID = 1L;
 	
 	@NotNull(message = "Data de Admissão é campo de preenchimento obrigatório!")
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaAdmissao;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaDemissao;
 	
-	@NotNull(message = "NIS é campo de preenchimento obrigatório!")
 	private String NIS;
 	
 	private String status;
@@ -47,9 +43,7 @@ public class FuncionarioDTO extends PessoaDTO{
 		this.userName = pFuncionario.getUserName();
 		this.senha = pFuncionario.getSenha();
 		this.tipoPessoa = pFuncionario.getTipoPessoa();
-		this.idAssinante = pFuncionario.getAssinante().getIdAssinante();
-		this.nomeAssinante = pFuncionario.getAssinante().getNomeAssinante();
-		this.cpfCnpjAssinante = pFuncionario.getAssinante().getCpfCnpj();
+		this.fotoPessoa = pFuncionario.getFotoPessoa();
 		this.dtaAdmissao = pFuncionario.getDtaAdmissao();
 		this.dtaDemissao= pFuncionario.getDtaDemissao();
 		this.NIS = pFuncionario.getNIS();

@@ -29,7 +29,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		//Recuperando o Token que foi enviado por Parâmetro na requisição
-		String token = recuperaToken(request);
+		String token = jwtUtil.recuperaToken(request);
 		
 		//Verificando se o token foi encontrado
 		if(token != null) {		
@@ -43,16 +43,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter{
 		
 		//Continua a rotina de autorização do Spring
 		chain.doFilter(request, response);
-	}
-
-	private String recuperaToken(HttpServletRequest request) {
-		String token = request.getHeader("Authorization");
-		
-		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
-			return null;
-		}
-		
-		return token.substring(7, token.length());
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthentication(String token) {

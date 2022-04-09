@@ -45,8 +45,9 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(lstFuncionariosDTO);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
-	public ResponseEntity<FuncionarioDTO> create(@RequestBody FuncionarioDTO oFuncionarioDTO){
+	public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO oFuncionarioDTO){
 		
 		Funcionario oFuncionario = funcionarioService.create(oFuncionarioDTO);
 		

@@ -1,6 +1,6 @@
 package com.projeto.syscomn.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -43,11 +43,11 @@ public class Fornecedor extends Pessoa{
 	
 	public Fornecedor(Integer idPessoa, String nomePessoa,
 			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, Date dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
+			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
 			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
-			byte[] fotoPessoa, Assinante assinante) {
+			byte[] fotoPessoa) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa, assinante);
+				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa);
 	}
 		
 	public Fornecedor(FornecedorDTO pFornecedorDTO) {
@@ -70,7 +70,6 @@ public class Fornecedor extends Pessoa{
 		this.inscricaoEstadual = pFornecedorDTO.getInscricaoEstadual();
 		this.cnae = pFornecedorDTO.getCnae();
 		this.status = pFornecedorDTO.getStatus();
-		this.assinante = new Assinante();
 		this.tipoFornecedor = new TipoFornecedor();
 	}
 

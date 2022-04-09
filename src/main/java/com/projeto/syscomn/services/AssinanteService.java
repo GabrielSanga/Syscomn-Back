@@ -27,12 +27,10 @@ public class AssinanteService {
 		return assinanteRepository.findAll();
 	}
 
-	public Assinante create(AssinanteDTO oAssinanteDTO) {
-		oAssinanteDTO.setIdAssinante(null);
-		
-		Assinante oAssinante = new Assinante(oAssinanteDTO);
-		
-		return assinanteRepository.save(oAssinante);
+	public Integer create(Assinante pAssinante) {
+		pAssinante.setIdAssinante(null);
+				
+		return assinanteRepository.save(pAssinante).getIdAssinante();
 	}
 
 	public Assinante update(AssinanteDTO oAssinanteDTO, Integer id) {

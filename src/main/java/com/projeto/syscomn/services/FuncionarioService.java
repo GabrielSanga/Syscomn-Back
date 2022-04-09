@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.projeto.syscomn.domain.Assinante;
 import com.projeto.syscomn.domain.Funcionario;
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
 import com.projeto.syscomn.repositores.FuncionarioRepository;
@@ -20,9 +19,6 @@ public class FuncionarioService {
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
-	
-	@Autowired
-	private AssinanteService assinanteService;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -38,7 +34,7 @@ public class FuncionarioService {
 	}
 
 	public Funcionario create(@Valid FuncionarioDTO pFuncionarioDTO) {		
-		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO));
+		return funcionarioRepository.save(newFuncionario(pFuncionarioDTO, false));
 	}
 	
 	public Funcionario update(@Valid FuncionarioDTO oFuncionarioDTO, Integer id) {
@@ -46,7 +42,7 @@ public class FuncionarioService {
 		
 		Funcionario oFuncionario = findById(oFuncionarioDTO.getIdPessoa());
 		
-		oFuncionario = newFuncionario(oFuncionarioDTO);
+		oFuncionario = newFuncionario(oFuncionarioDTO, true);
 		
 		return funcionarioRepository.save(oFuncionario);
 	}
@@ -57,16 +53,14 @@ public class FuncionarioService {
 		funcionarioRepository.deleteById(oFuncionario.getIdPessoa());
 	}
 	
-	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO) {			
-		Assinante oAssinante = assinanteService.findById(pFuncionarioDTO.getIdAssinante());
-		
-		if (oAssinante == null) { return null; }
-				
+	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO, boolean isUpdated) {			
 		Funcionario oFuncionario = new Funcionario(pFuncionarioDTO);
-		oFuncionario.setAssinante(oAssinante);
-		//Realizando a criptografia da senha
-		oFuncionario.setSenha(encoder.encode(oFuncionario.getSenha()));
-	
+		
+		if(!isUpdated) {
+			//Realizando a criptografia da senha
+			oFuncionario.setSenha(encoder.encode(oFuncionario.getSenha()));
+		}
+
 		return oFuncionario;			
 	}
 

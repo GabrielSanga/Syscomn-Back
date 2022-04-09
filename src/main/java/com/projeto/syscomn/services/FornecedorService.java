@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.syscomn.domain.Assinante;
 import com.projeto.syscomn.domain.Fornecedor;
 import com.projeto.syscomn.domain.TipoFornecedor;
 import com.projeto.syscomn.domain.dtos.FornecedorDTO;
@@ -21,8 +20,6 @@ public class FornecedorService {
 	@Autowired
 	private FornecedorRepository fornecedorRepository;
 	
-	@Autowired
-	private AssinanteService assinanteService;	
 	@Autowired
 	private TipoFornecedorService tipoFornecedorService;
 	
@@ -57,13 +54,11 @@ public class FornecedorService {
 	}
 	
 	private Fornecedor newFornecedor(FornecedorDTO pFornecedorDTO) {			
-		Assinante oAssinante = assinanteService.findById(pFornecedorDTO.getIdAssinante());
 		TipoFornecedor oTipoFornecedor = tipoFornecedorService.findById(pFornecedorDTO.getIdTipoFornecedor());
 			
-		if (oAssinante == null || oTipoFornecedor == null) { return null; }
+		if (oTipoFornecedor == null) { return null; }
 				
 		Fornecedor oFornecedor = new Fornecedor(pFornecedorDTO);
-		oFornecedor.setAssinante(oAssinante);
 		oFornecedor.setTipoFornecedor(oTipoFornecedor);
 	
 		return oFornecedor;	

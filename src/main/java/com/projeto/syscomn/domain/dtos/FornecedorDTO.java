@@ -52,9 +52,6 @@ public class FornecedorDTO extends PessoaDTO{
 		this.userName = pFornecedor.getUserName();
 		this.senha = pFornecedor.getSenha();
 		this.tipoPessoa = pFornecedor.getTipoPessoa();
-		this.idAssinante = pFornecedor.getAssinante().getIdAssinante();
-		this.nomeAssinante = pFornecedor.getAssinante().getNomeAssinante();
-		this.cpfCnpjAssinante = pFornecedor.getAssinante().getCpfCnpj();
 		this.razaoSocial = pFornecedor.getRazaoSocial();
 		this.nomeFantasia = pFornecedor.getNomeFantasia();
 		this.inscricaoEstadual = pFornecedor.getInscricaoEstadual();

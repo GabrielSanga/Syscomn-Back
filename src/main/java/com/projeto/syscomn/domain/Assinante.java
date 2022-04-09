@@ -46,6 +46,13 @@ public class Assinante implements Serializable{
 		super();
 	}
 	
+	public Assinante(String nomeAssinante, Integer tipoPessoa, @CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpj) {
+		super();
+		this.nomeAssinante = nomeAssinante;
+		this.tipoPessoa = tipoPessoa;
+		this.cpfCnpj = cpfCnpj;
+	}
+	
 	public Assinante(AssinanteDTO pAssinanteDTO) {
 		super();
 		this.idAssinante = pAssinanteDTO.getIdAssinante();
@@ -53,5 +60,5 @@ public class Assinante implements Serializable{
 		this.tipoPessoa = pAssinanteDTO.getTipoPessoa();
 		this.cpfCnpj = pAssinanteDTO.getCpfCnpj();
 	}
-		
+	
 }
