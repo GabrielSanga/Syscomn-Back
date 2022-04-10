@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.projeto.syscomn.domain.dtos.FormulaRacaoDTO;
+
 import lombok.Getter;
 import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -34,5 +35,13 @@ public class FormulaRacao implements Serializable{
 	private Racao racao;
 	
 	public FormulaRacao() {}
-	
+
+	public FormulaRacao(FormulaRacaoDTO pFormulaRacaoDTO) {
+		super();
+		this.idFormulaRacao = pFormulaRacaoDTO.getIdFormulaRacao();
+		this.quantidade = pFormulaRacaoDTO.getQuantidade();
+		this.materiaPrima = new MateriaPrima();
+		this.racao = new Racao();
+	}
+		
 }

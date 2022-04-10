@@ -47,7 +47,7 @@ public class MateriaPrimaResource {
 	 
 	@PostMapping
 	public ResponseEntity<MateriaPrimaDTO> create(@Valid @RequestBody MateriaPrimaDTO oMateriaPrimaDTO){
-		MateriaPrima oMateriaPrima =materiaPrimaService.create(oMateriaPrimaDTO);
+		MateriaPrima oMateriaPrima = materiaPrimaService.create(oMateriaPrimaDTO);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idMateriaPrima}").buildAndExpand(oMateriaPrima.getIdMateriaPrima()).toUri();
 		

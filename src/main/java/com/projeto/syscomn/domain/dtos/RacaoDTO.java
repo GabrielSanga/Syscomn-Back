@@ -1,25 +1,22 @@
-package com.projeto.syscomn.domain;
+package com.projeto.syscomn.domain.dtos;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projeto.syscomn.domain.dtos.RacaoDTO;
+import com.projeto.syscomn.domain.FormulaRacao;
+import com.projeto.syscomn.domain.Racao;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-public class Racao implements Serializable{
+public class RacaoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -28,16 +25,17 @@ public class Racao implements Serializable{
 	
 	private String descricao;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "racao")
 	private List<FormulaRacao> lstMateriaPrima = new ArrayList<>();
 	
-	public Racao() {}
-
-	public Racao(RacaoDTO pRacaoDTO) {
+	public RacaoDTO() {
 		super();
-		this.idRacao = pRacaoDTO.getIdRacao();
-		this.descricao = pRacaoDTO.getDescricao();
 	}
-
+	
+	public RacaoDTO(Racao pRacao) {
+		super();
+		this.idRacao = pRacao.getIdRacao();
+		this.descricao = pRacao.getDescricao();
+		this.lstMateriaPrima = pRacao.getLstMateriaPrima();
+	}
+	
 }
