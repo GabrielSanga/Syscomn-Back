@@ -79,8 +79,7 @@ public abstract class Pessoa implements Serializable{
     @Lob
     @Type(type = "org.hibernate.type.ImageType")
     protected byte[] fotoPessoa;
-	
-	
+		
 	public Pessoa() {
 		super();
 	}

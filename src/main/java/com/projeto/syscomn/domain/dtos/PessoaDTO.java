@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
@@ -70,9 +69,9 @@ public class PessoaDTO implements Serializable {
 	protected String nomeAssinante;
 	protected String cpfCnpjAssinante;
 	
-	public Set<Perfil> getPerfis() {
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-	}
+	//public Set<Perfil> getPerfis() {
+	//	return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	//}
 
 	public void addPerfil(Perfil perfil) {
 		this.perfis.add(perfil.getCodigo());

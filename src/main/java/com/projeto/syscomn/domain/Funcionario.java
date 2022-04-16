@@ -2,7 +2,6 @@ package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 
@@ -10,7 +9,6 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
-import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
 
@@ -33,7 +31,6 @@ public class Funcionario extends Pessoa {
 	
 	public Funcionario() {
 		super();
-		addPerfil(Perfil.FUNCIONARIO);
 	}
 
 	public Funcionario(Integer idPessoa, String nomePessoa,
@@ -43,7 +40,6 @@ public class Funcionario extends Pessoa {
 			byte[] fotoPessoa) {
 		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
 				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa);
-		addPerfil(Perfil.FUNCIONARIO);
 	}
 		
 	public Funcionario(FuncionarioDTO pFuncionarioDTO){
@@ -65,7 +61,7 @@ public class Funcionario extends Pessoa {
 		this.dtaDemissao= pFuncionarioDTO.getDtaDemissao();
 		this.NIS = pFuncionarioDTO.getNIS();
 		this.status = pFuncionarioDTO.getStatus();
-		this.perfis = pFuncionarioDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.perfis = pFuncionarioDTO.getPerfis();//.stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 	}
 
 

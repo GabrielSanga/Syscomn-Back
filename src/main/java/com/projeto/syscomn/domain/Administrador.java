@@ -2,7 +2,6 @@ package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 
@@ -65,7 +64,7 @@ public class Administrador extends Pessoa{
 		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
 		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
 		this.status = pAdministadorDTO.getStatus();
-		this.perfis = pAdministadorDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.perfis = pAdministadorDTO.getPerfis();//.stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		super.addPerfil(Perfil.ADMIN);
 	}
 		

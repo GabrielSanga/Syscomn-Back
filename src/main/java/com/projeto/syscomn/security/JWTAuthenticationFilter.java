@@ -56,8 +56,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	
 	/*Caso tenha sucesso na autenticação entra nesse método*/
 	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
-			Authentication authResult) throws IOException, ServletException {
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 		//Obs: AuthResult é o resultado da autenticação
 		
 		//Pegando o login que foi autenticado

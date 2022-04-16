@@ -10,8 +10,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.Funcionario;
+import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
+import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.repositores.FuncionarioRepository;
+import com.projeto.syscomn.repositores.PessoaRepository;
 import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -19,6 +22,9 @@ public class FuncionarioService {
 	
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -55,8 +61,16 @@ public class FuncionarioService {
 	
 	private Funcionario newFuncionario(FuncionarioDTO pFuncionarioDTO, boolean isUpdated) {			
 		Funcionario oFuncionario = new Funcionario(pFuncionarioDTO);
-		
+			
 		if(!isUpdated) {
+			oFuncionario.addPerfil(Perfil.FUNCIONARIO);
+
+			//Validando se login já existe no sistema
+			Optional<Pessoa> oPessoa = pessoaRepository.findByUserName(pFuncionarioDTO.getUserName());
+			
+			if(oPessoa.orElse(null) != null) {
+				throw new ObjectNotFoundException("Login já cadastrado no sistema!");
+			}
 			//Realizando a criptografia da senha
 			oFuncionario.setSenha(encoder.encode(oFuncionario.getSenha()));
 		}

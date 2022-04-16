@@ -10,8 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.Administrador;
+import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.AdministradorDTO;
 import com.projeto.syscomn.repositores.AdministradorRepository;
+import com.projeto.syscomn.repositores.PessoaRepository;
 import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -19,6 +21,9 @@ public class AdministradorService {
 	
 	@Autowired
 	private AdministradorRepository administradorRepository;
+	
+	@Autowired
+	private PessoaRepository pessoaRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
@@ -55,6 +60,14 @@ public class AdministradorService {
 	
 	private Administrador newAdministrador(AdministradorDTO pAdministradorDTO) {					
 		Administrador oAdministrador = new Administrador(pAdministradorDTO);
+		
+		//Validando se login já existe no sistema
+		Optional<Pessoa> oPessoa = pessoaRepository.findByUserName(pAdministradorDTO.getUserName());
+		
+		if(oPessoa.orElse(null) != null) {
+			throw new ObjectNotFoundException("Login já cadastrado no sistema!");
+		}
+
 		//Realizando a criptografia da senha
 		oAdministrador.setSenha(encoder.encode(oAdministrador.getSenha()));
 	

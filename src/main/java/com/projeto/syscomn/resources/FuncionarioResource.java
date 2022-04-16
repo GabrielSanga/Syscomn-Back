@@ -23,6 +23,7 @@ import com.projeto.syscomn.domain.Funcionario;
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
 import com.projeto.syscomn.services.FuncionarioService;
 
+@PreAuthorize("hasAnyRole('ADMIN')")
 @RestController
 @RequestMapping(value = "funcionario")
 public class FuncionarioResource {
@@ -45,7 +46,6 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(lstFuncionariosDTO);
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<FuncionarioDTO> create(@Valid @RequestBody FuncionarioDTO oFuncionarioDTO){
 		
@@ -56,7 +56,6 @@ public class FuncionarioResource {
 		return ResponseEntity.created(uri).build();	
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<FuncionarioDTO> update(@Valid @RequestBody FuncionarioDTO oFuncionarioDTO, @PathVariable Integer id){
 		Funcionario oFuncionario = funcionarioService.update(oFuncionarioDTO, id);
@@ -64,7 +63,6 @@ public class FuncionarioResource {
 		return ResponseEntity.ok().body(new FuncionarioDTO(oFuncionario));
 	}
 	
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<FuncionarioDTO> delete(@PathVariable Integer id){
 		funcionarioService.delete(id);

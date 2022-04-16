@@ -15,6 +15,9 @@ public class UsuarioDTO  implements Serializable{
 	private Integer idUsuario;
 	private String nomeUsuario;
     private byte[] foto;
+    private String senhaAntiga;
+    private String senha;
+    private Integer idUsuarioAlteracao;
     
     public UsuarioDTO() {}
    
