@@ -16,6 +16,7 @@ public class FormulaRacaoDTO implements Serializable {
 
 	private Integer idFormulaRacao;
 	
+	@NotNull(message = "Quantidade é campo de preenchimento obrigatório!")
 	private Integer quantidade;
 	
 	@NotNull(message = "Matéria Prima é campo de preenchimento obrigatório!")

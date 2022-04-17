@@ -1,5 +1,6 @@
 package com.projeto.syscomn.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,12 @@ public class OrdemProducaoRacaoService {
 
 		return OrdemProducaoRacao.orElseThrow(() -> new ObjectNotFoundException("Ordem de Produção não encontrada! ID: " + id));
 	}
+	
+	public List<OrdemProducaoRacao> findByData(LocalDate dataOrdem) {
+		Optional<List<OrdemProducaoRacao>> OrdemProducaoRacao = ordemProducaoRepository.findByData(dataOrdem);
+
+		return OrdemProducaoRacao.orElseThrow(() -> new ObjectNotFoundException("Não encontrado Ordem de Produção para a data! Data: " + dataOrdem));
+	}
 
 	public List<OrdemProducaoRacao> findAll() {
 		return ordemProducaoRepository.findAll(Sort.by(Sort.Direction.DESC, "data"));
@@ -51,6 +58,7 @@ public class OrdemProducaoRacaoService {
 		//deleta todas as produções do banco
 		racaoProduzirService.deleteAll(oOrdemProducaoRacao.getLstRacaoProduzir());
 		
+		//Adiciona as que vieram da tela
 		racaoProduzirService.createAll(pOrdemProducaoRacaoDTO.getLstRacaoProduzir(), oOrdemProducaoRacao.getIdOrdemProducaoRacao());
 
 		oOrdemProducaoRacao = newOrdemProducao(pOrdemProducaoRacaoDTO);

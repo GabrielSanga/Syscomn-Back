@@ -1,6 +1,8 @@
 package com.projeto.syscomn.resources;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,14 @@ public class OrdemProducaoRacaoResource {
 		OrdemProducaoRacao oOrdemProducaoRacao = ordemProducaoService.findById(id);
 		
 		return ResponseEntity.ok().body(new OrdemProducaoRacaoDTO(oOrdemProducaoRacao));
+	}
+	
+	@GetMapping(value = "/data")
+	public ResponseEntity<List<OrdemProducaoRacaoDTO>> findByData(){
+		List<OrdemProducaoRacao> lstOrdemProducaoRacao = ordemProducaoService.findByData(LocalDate.now());
+		List<OrdemProducaoRacaoDTO> lstOrdemProducaoRacaoDTO = lstOrdemProducaoRacao.stream().map(x -> new OrdemProducaoRacaoDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(lstOrdemProducaoRacaoDTO);
 	}
 	
 	@GetMapping
