@@ -28,8 +28,8 @@ public class OrdemProducaoRacaoDTO implements Serializable {
 	
 	private Float valorOrdemProducao;
 	
-	private Integer idFuncionario;
-	private String nomeFuncionario;
+	private Integer idPessoa;
+	private String nomePessoa;
 	
 	private Integer status;
 	
@@ -45,8 +45,8 @@ public class OrdemProducaoRacaoDTO implements Serializable {
 		this.descricao = pOrdemProducaoRacao.getDescricao();
 		this.data = pOrdemProducaoRacao.getData();
 		this.valorOrdemProducao = pOrdemProducaoRacao.getValorOrdemProducao();
-		this.idFuncionario = pOrdemProducaoRacao.getFuncionario().getIdPessoa();
-		this.nomeFuncionario = pOrdemProducaoRacao.getFuncionario().getNomePessoa();
+		this.idPessoa = pOrdemProducaoRacao.getPessoa().getIdPessoa();
+		this.nomePessoa = pOrdemProducaoRacao.getPessoa().getNomePessoa();
 		this.status = pOrdemProducaoRacao.getStatus();
 		this.lstRacaoProduzir = pOrdemProducaoRacao.getLstRacaoProduzir().stream().map(x -> new RacaoProduzirDTO(x)).collect(Collectors.toList());
 	}

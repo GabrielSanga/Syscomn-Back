@@ -1,11 +1,14 @@
 package com.projeto.syscomn.domain.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.projeto.syscomn.domain.LoteRacao;
 import com.projeto.syscomn.domain.RacaoProduzir;
 
 import lombok.Getter;
@@ -28,6 +31,8 @@ public class RacaoProduzirDTO implements Serializable{
 	
 	private Integer quantidade;
 	
+	private List<LoteRacao> lstLoteRacao = new ArrayList<>();
+	
 	public RacaoProduzirDTO() {
 		super();
 	}
@@ -48,6 +53,7 @@ public class RacaoProduzirDTO implements Serializable{
 		this.descrRacao = pRacaoProduzir.getRacao().getDescricao();
 		this.idOrdemProducaoRacao = pRacaoProduzir.getOrdemProducaoRacao().getIdOrdemProducaoRacao();
 		this.quantidade = pRacaoProduzir.getQuantidade();
+		this.lstLoteRacao = pRacaoProduzir.getLstLoteRacao();
 
 	}
 

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.Funcionario;
 import com.projeto.syscomn.domain.OrdemProducaoRacao;
+import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.OrdemProducaoRacaoDTO;
 import com.projeto.syscomn.repositores.OrdemProducaoRacaoRepository;
+import com.projeto.syscomn.repositores.PessoaRepository;
 import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -26,7 +28,7 @@ public class OrdemProducaoRacaoService {
 	private RacaoProduzirService racaoProduzirService;
 	
 	@Autowired
-	private FuncionarioService funcionarioService;
+	private PessoaRepository pessoaRespoRepository;
 
 	public OrdemProducaoRacao findById(Integer id) {
 		Optional<OrdemProducaoRacao> OrdemProducaoRacao = ordemProducaoRepository.findById(id);
@@ -75,11 +77,11 @@ public class OrdemProducaoRacaoService {
 	//Converte o DTO em Entity e seta o usuário logado
 	private OrdemProducaoRacao newOrdemProducao(OrdemProducaoRacaoDTO pOrdemProducaoRacaoDTO) {
 		//Adicionando o objeto do Funcionário na Ordem de Produção
-		Funcionario oFuncionario = funcionarioService.findById(pOrdemProducaoRacaoDTO.getIdFuncionario());
+		Pessoa oPessoa = pessoaRespoRepository.findById(pOrdemProducaoRacaoDTO.getIdPessoa()).get();
 		
 		OrdemProducaoRacao oOrdemProducaoRacao = new OrdemProducaoRacao(pOrdemProducaoRacaoDTO);
 		
-		oOrdemProducaoRacao.setFuncionario(oFuncionario);
+		oOrdemProducaoRacao.setPessoa(oPessoa);
 		
 		return oOrdemProducaoRacao;
 	}

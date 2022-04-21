@@ -38,8 +38,8 @@ public class OrdemProducaoRacao implements Serializable{
 	private Integer status;
 	
 	@ManyToOne
-	@JoinColumn(name = "idFuncionario")
-	private Funcionario funcionario;
+	@JoinColumn(name = "idPessoa")
+	private Pessoa pessoa;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "ordemProducaoRacao")
@@ -55,7 +55,6 @@ public class OrdemProducaoRacao implements Serializable{
 		this.descricao = pOrdemProducaoRacaoDTO.getDescricao();
 		this.data = pOrdemProducaoRacaoDTO.getData();
 		this.valorOrdemProducao = pOrdemProducaoRacaoDTO.getValorOrdemProducao();
-		this.funcionario = new Funcionario();
 		this.status = pOrdemProducaoRacaoDTO.getStatus();
 	}	
 

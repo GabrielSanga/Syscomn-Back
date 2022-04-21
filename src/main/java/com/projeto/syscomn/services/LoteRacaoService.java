@@ -57,7 +57,7 @@ public class LoteRacaoService {
 	}
 	
 	private LoteRacao newLoteRacao(LoteRacaoDTO pLoteRacaoDTO) {			
-		RacaoProduzir oRacao = produzirService.findById(pLoteRacaoDTO.getIdRacao());
+		RacaoProduzir oRacao = produzirService.findById(pLoteRacaoDTO.getIdRacaoProduzir());
 		LocalArmazenamento oLocalArmazenamento = armazenamentoService.findById(pLoteRacaoDTO.getIdLocalArmazenamento());
 			
 		if (oRacao == null || oLocalArmazenamento == null) { return null; }
