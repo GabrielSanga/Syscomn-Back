@@ -22,7 +22,6 @@ public class VacinaDTO implements Serializable{
 	@NotNull(message = "Fabricante é campo de preenchimento obrigatório!")
 	private String fabricante;
 	
-	@NotNull(message = "Fornecedor é campo de preenchimento obrigatório!")
 	private Integer fornecedor; 
 	
 	private String nomeFantasia;
@@ -35,7 +34,7 @@ public class VacinaDTO implements Serializable{
 		this.nomeVacina = pVacina.getNomeVacina();
 		this.fabricante = pVacina.getFabricante();
 		this.fornecedor = pVacina.getFornecedor().getIdPessoa();
-		this.nomeFantasia = pVacina.getFornecedor().getRazaoSocial();
+		this.nomeFantasia = pVacina.getFornecedor().getNomeFantasia();
 		}
 	
 }

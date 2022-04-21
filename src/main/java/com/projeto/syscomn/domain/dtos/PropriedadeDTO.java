@@ -42,8 +42,7 @@ public class PropriedadeDTO implements Serializable{
 		this.nomePropriedade = pPropriedade.getNomePropriedade();
 		this.endereco = pPropriedade.getEndereco();
 		this.cnpj = pPropriedade.getCnpj();
-		this.status = pPropriedade.getStatus().getCodigo(); 
-		
+		this.status = pPropriedade.getStatus().getCodigo(); 	
 	}
 
 	public Status getStatus() {

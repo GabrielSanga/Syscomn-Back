@@ -24,17 +24,11 @@ public class MovimentacaoDTO implements Serializable{
 	@NotNull(message = "Lote é campo de preenchimento obrigatório!")
 	private Integer lote; 
 	
-	//@NotNull(message = "Funcionario é campo de preenchimento obrigatório!")
-	//private Integer funcionario;
-	
 	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
 	private Integer curralPiquete; 
 	
 	@Getter 
 	private String descLote;
-	
-	//@Getter 
-	//private String nomeFuncionario;
 	
 	@Getter 
 	private String descCurralPiquete;
@@ -50,10 +44,8 @@ public class MovimentacaoDTO implements Serializable{
 		this.idMovimentacao = pMovimentacao.getIdMovimentacao();
 		this.dataHoraMovimentacao = pMovimentacao.getDataHoraMovimentacao();
 		this.lote = pMovimentacao.getLote().getIdLote();
-		//this.funcionario = pMovimentacao.getFuncionario().getIdPessoa();
 		this.descCurralPiquete = pMovimentacao.getCurralPiquete().getDescricao();
 		this.curralPiquete = pMovimentacao.getCurralPiquete().getIdCurralPiquete();
-		//this.nomeFuncionario = pMovimentacao.getFuncionario().getNomePessoa();
 		this.descLote = pMovimentacao.getLote().getDescricao();
 		this.situacao = pMovimentacao.getSituacao();
 	}
