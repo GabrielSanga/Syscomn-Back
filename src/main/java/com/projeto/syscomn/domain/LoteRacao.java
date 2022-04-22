@@ -37,7 +37,7 @@ public class LoteRacao implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "idRacaoProduzir")
-	private RacaoProduzir racao;
+	private RacaoProduzir racaoProduzir;
 	
 	@ManyToOne
 	@JoinColumn(name = "idLocalArmazenamento")
