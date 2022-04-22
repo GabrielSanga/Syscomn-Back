@@ -57,14 +57,15 @@ public class LoteRacaoService {
 	}
 	
 	private LoteRacao newLoteRacao(LoteRacaoDTO pLoteRacaoDTO) {			
-		RacaoProduzir oRacao = produzirService.findById(pLoteRacaoDTO.getIdRacaoProduzir());
+		RacaoProduzir oRacaoProduzir = produzirService.findById(pLoteRacaoDTO.getIdRacaoProduzir());
 		LocalArmazenamento oLocalArmazenamento = armazenamentoService.findById(pLoteRacaoDTO.getIdLocalArmazenamento());
 			
-		if (oRacao == null || oLocalArmazenamento == null) { return null; }
+		if (oRacaoProduzir == null || oLocalArmazenamento == null) { return null; }
 				
 		LoteRacao oLoteRacao = new LoteRacao(pLoteRacaoDTO);
-		oLoteRacao.setRacao(oRacao);
+		oLoteRacao.setRacao(oRacaoProduzir);
 		oLoteRacao.setLocalArmazenamento(oLocalArmazenamento);
+		oLoteRacao.setDataValidade(oLoteRacao.getDataFabricacao().plusDays(oRacaoProduzir.getRacao().getDiasValidade()));
 	
 		return oLoteRacao;	
 	}

@@ -29,6 +29,8 @@ public class LoteRacao implements Serializable{
 	
 	private LocalDate dataValidade;
 	
+	private Double quantidade;
+	
 	private Double saldo;
 	
 	private String unidade;
@@ -51,6 +53,7 @@ public class LoteRacao implements Serializable{
 		this.idLoteRacao = pLoteRacao.getIdLoteRacao();
 		this.dataFabricacao = pLoteRacao.getDataFabricacao();
 		this.dataValidade = pLoteRacao.getDataValidade();
+		this.quantidade = pLoteRacao.getQuantidade();
 		this.saldo = pLoteRacao.getSaldo();
 		this.unidade = pLoteRacao.getUnidade();
 		this.custo = pLoteRacao.getCusto();

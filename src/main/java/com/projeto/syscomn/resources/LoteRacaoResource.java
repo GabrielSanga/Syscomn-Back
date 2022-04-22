@@ -1,6 +1,7 @@
 package com.projeto.syscomn.resources;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,12 @@ public class LoteRacaoResource {
 	
 	@PostMapping
 	public ResponseEntity<LoteRacaoDTO> create(@Valid @RequestBody LoteRacaoDTO pLoteRacaoDTO){
+		//Seta a quantidade como saldo no momento do cadastro
+		pLoteRacaoDTO.setSaldo(pLoteRacaoDTO.getQuantidade());
+		
+		//Seta a data atual como fabricação
+		pLoteRacaoDTO.setDataFabricacao(LocalDate.now());
+		
 		LoteRacao oLoteRacao = loteRacaoService.create(pLoteRacaoDTO);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idLoteRacao}").buildAndExpand(oLoteRacao.getIdLoteRacao()).toUri();
