@@ -27,9 +27,6 @@ public class LoteRacaoDTO {
 	
 	private Double saldo;
 	
-	@NotNull(message = "Unidade é campo de preenchimento obrigatório!")
-	private String unidade;
-	
 	private Double custo;
 	
 	@NotNull(message = "Ração é campo de preenchimento obrigatório!")
@@ -50,7 +47,6 @@ public class LoteRacaoDTO {
 		this.dataFabricacao = pLoteRacao.getDataFabricacao();
 		this.dataValidade = pLoteRacao.getDataValidade();
 		this.saldo = pLoteRacao.getSaldo();
-		this.unidade = pLoteRacao.getUnidade();
 		this.custo = pLoteRacao.getCusto();
 		this.idRacaoProduzir = pLoteRacao.getRacao().getIdRacaoProduzir();
 		this.idLocalArmazenamento = pLoteRacao.getLocalArmazenamento().getIdLocalArmazenamento();

@@ -33,8 +33,6 @@ public class LoteRacao implements Serializable{
 	
 	private Double saldo;
 	
-	private String unidade;
-	
 	private Double custo;
 	
 	@ManyToOne
@@ -55,7 +53,6 @@ public class LoteRacao implements Serializable{
 		this.dataValidade = pLoteRacao.getDataValidade();
 		this.quantidade = pLoteRacao.getQuantidade();
 		this.saldo = pLoteRacao.getSaldo();
-		this.unidade = pLoteRacao.getUnidade();
 		this.custo = pLoteRacao.getCusto();
 	}
 

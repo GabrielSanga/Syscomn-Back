@@ -30,6 +30,8 @@ public class Racao implements Serializable{
 	
 	private Integer diasValidade;
 	
+	private String unidade;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "racao")
 	private List<FormulaRacao> lstMateriaPrima = new ArrayList<>();
@@ -41,6 +43,7 @@ public class Racao implements Serializable{
 		this.idRacao = pRacaoDTO.getIdRacao();
 		this.descricao = pRacaoDTO.getDescricao();
 		this.diasValidade = pRacaoDTO.getDiasValidade();
+		this.unidade = pRacaoDTO.getUnidade();
 	}
 
 }

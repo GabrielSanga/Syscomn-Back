@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.projeto.syscomn.domain.Funcionario;
 import com.projeto.syscomn.domain.OrdemProducaoRacao;
 import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.OrdemProducaoRacaoDTO;
