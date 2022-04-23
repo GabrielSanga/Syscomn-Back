@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.syscomn.domain.Lote;
 import com.projeto.syscomn.domain.dtos.LoteDTO;
+import com.projeto.syscomn.domain.dtos.UsuarioDTO;
+import com.projeto.syscomn.security.JWTUtil;
 import com.projeto.syscomn.services.LoteService;
 
 @RestController
@@ -28,6 +31,8 @@ public class LoteResource {
 	
 	@Autowired
 	private LoteService loteService;
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<LoteDTO> findById(@PathVariable Integer id){
@@ -46,8 +51,10 @@ public class LoteResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<LoteDTO> create(@Valid @RequestBody LoteDTO oLoteDTO){
-		Lote oLote = loteService.create(oLoteDTO);
+	public ResponseEntity<LoteDTO> create(@Valid @RequestBody LoteDTO oLoteDTO, HttpServletRequest request){
+		UsuarioDTO oUsuarioDTO = jwtUtil.getUsuarioLogado(request);
+		
+		Lote oLote = loteService.create(oLoteDTO, oUsuarioDTO.getIdUsuario());
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idLote}").buildAndExpand(oLote.getIdLote()).toUri();
 		
@@ -55,8 +62,10 @@ public class LoteResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<LoteDTO> update(@PathVariable Integer id, @Valid @RequestBody LoteDTO oLoteDTO){
-		Lote oLote = loteService.update(id, oLoteDTO);
+	public ResponseEntity<LoteDTO> update(@PathVariable Integer id, @Valid @RequestBody LoteDTO oLoteDTO, HttpServletRequest request){
+		UsuarioDTO oUsuarioDTO = jwtUtil.getUsuarioLogado(request);
+		
+		Lote oLote = loteService.update(id, oLoteDTO, oUsuarioDTO.getIdUsuario());
 		
 		return ResponseEntity.ok().body(new LoteDTO(oLote));
 	}

@@ -38,9 +38,9 @@ public class Movimentacao implements Serializable{
 	@JoinColumn(name = "idCurralPiquete")
 	private CurralPiquete curralPiquete;
 	
-	//@ManyToOne
-	//@JoinColumn(name = "idPessoa")
-	//private Funcionario funcionario;
+	@ManyToOne
+	@JoinColumn(name = "idPessoa")
+	private Pessoa pessoa;
 	
 	private Integer situacao;
 	
@@ -48,13 +48,13 @@ public class Movimentacao implements Serializable{
 		super();
 	}
 	
-	public Movimentacao(Lote lote, CurralPiquete curralPiquete,/* Funcionario funcionario ,*/Integer situacao) {
+	public Movimentacao(Lote lote, CurralPiquete curralPiquete, Pessoa pessoa , Integer situacao) {
 		super();
 		this.dataHoraMovimentacao = LocalDateTime.now();
 		this.situacao = situacao;
 		this.curralPiquete = curralPiquete;
 		this.lote = lote;
-		//this.funcionario = funcionario;
+		this.pessoa = pessoa;
 	}	
 	
 	public Movimentacao(MovimentacaoDTO pMovimentacaoDTO) {
@@ -64,7 +64,4 @@ public class Movimentacao implements Serializable{
 		this.situacao = pMovimentacaoDTO.getSituacao();
 	}
 	
-	//public Situacao getSituacao() {
-	//	return Situacao.toEnum(this.situacao);
-	//}
 }

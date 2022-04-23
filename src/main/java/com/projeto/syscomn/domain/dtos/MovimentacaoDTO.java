@@ -3,8 +3,6 @@ package com.projeto.syscomn.domain.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.Movimentacao;
 
@@ -21,11 +19,14 @@ public class MovimentacaoDTO implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataHoraMovimentacao = LocalDateTime.now();
 	
-	@NotNull(message = "Lote é campo de preenchimento obrigatório!")
 	private Integer lote; 
 	
-	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
+	private Integer idPessoa;
+	
 	private Integer curralPiquete; 
+	
+	@Getter 
+	private String nomePessoa;
 	
 	@Getter 
 	private String descLote;
@@ -48,6 +49,8 @@ public class MovimentacaoDTO implements Serializable{
 		this.curralPiquete = pMovimentacao.getCurralPiquete().getIdCurralPiquete();
 		this.descLote = pMovimentacao.getLote().getDescricao();
 		this.situacao = pMovimentacao.getSituacao();
+		this.idPessoa = pMovimentacao.getPessoa().getIdPessoa();
+		this.nomePessoa = pMovimentacao.getPessoa().getNomePessoa();
 	}
 	
 }
