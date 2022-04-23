@@ -29,15 +29,15 @@ public class LoteRacao implements Serializable{
 	
 	private LocalDate dataValidade;
 	
-	private Double saldo;
+	private Double quantidade;
 	
-	private String unidade;
+	private Double saldo;
 	
 	private Double custo;
 	
 	@ManyToOne
 	@JoinColumn(name = "idRacaoProduzir")
-	private RacaoProduzir racao;
+	private RacaoProduzir racaoProduzir;
 	
 	@ManyToOne
 	@JoinColumn(name = "idLocalArmazenamento")
@@ -51,8 +51,8 @@ public class LoteRacao implements Serializable{
 		this.idLoteRacao = pLoteRacao.getIdLoteRacao();
 		this.dataFabricacao = pLoteRacao.getDataFabricacao();
 		this.dataValidade = pLoteRacao.getDataValidade();
+		this.quantidade = pLoteRacao.getQuantidade();
 		this.saldo = pLoteRacao.getSaldo();
-		this.unidade = pLoteRacao.getUnidade();
 		this.custo = pLoteRacao.getCusto();
 	}
 

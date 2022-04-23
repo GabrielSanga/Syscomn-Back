@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 import com.projeto.syscomn.domain.LoteRacao;
 
 import lombok.Getter;
@@ -19,19 +21,22 @@ public class LoteRacaoDTO {
 	
 	private LocalDate dataValidade;
 	
-	@NotNull(message = "Saldo é campo de preenchimento obrigatório!")
+	@NotNull(message = "Quantidade é campo de preenchimento obrigatório!")
+	@Range(min = 1, max = 999, message = "Quantidade deve ser maior que 0")
+	private Double quantidade;
+	
 	private Double saldo;
 	
-	@NotNull(message = "Unidade é campo de preenchimento obrigatório!")
-	private String unidade;
-	
 	private Double custo;
+	
+	private String unidade;
 	
 	@NotNull(message = "Ração é campo de preenchimento obrigatório!")
 	private Integer idRacaoProduzir;
 	
 	@NotNull(message = "Local de Armazenamento é campo de preenchimento obrigatório!")
 	private Integer idLocalArmazenamento;
+	private String descrLocalArmazenamento;
 	
 	private Integer idOrdemProducao;
 
@@ -44,10 +49,11 @@ public class LoteRacaoDTO {
 		this.dataFabricacao = pLoteRacao.getDataFabricacao();
 		this.dataValidade = pLoteRacao.getDataValidade();
 		this.saldo = pLoteRacao.getSaldo();
-		this.unidade = pLoteRacao.getUnidade();
 		this.custo = pLoteRacao.getCusto();
-		this.idRacaoProduzir = pLoteRacao.getRacao().getIdRacaoProduzir();
+		this.unidade = pLoteRacao.getRacaoProduzir().getRacao().getUnidade();
+		this.idRacaoProduzir = pLoteRacao.getRacaoProduzir().getIdRacaoProduzir();
 		this.idLocalArmazenamento = pLoteRacao.getLocalArmazenamento().getIdLocalArmazenamento();
+		this.descrLocalArmazenamento = pLoteRacao.getLocalArmazenamento().getDescricao();
 	}
 
 }

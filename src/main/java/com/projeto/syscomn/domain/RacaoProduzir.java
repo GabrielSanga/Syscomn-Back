@@ -37,8 +37,9 @@ public class RacaoProduzir implements Serializable{
 	private OrdemProducaoRacao ordemProducaoRacao;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "racao")
+	@OneToMany(mappedBy = "racaoProduzir")
 	private List<LoteRacao> lstLoteRacao = new ArrayList<>();
+	
 	
 	private Integer quantidade;
 

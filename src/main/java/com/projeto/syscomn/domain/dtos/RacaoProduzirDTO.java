@@ -3,6 +3,7 @@ package com.projeto.syscomn.domain.dtos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,9 @@ public class RacaoProduzirDTO implements Serializable{
 	
 	private Integer quantidade;
 	
-	private List<LoteRacao> lstLoteRacao = new ArrayList<>();
+	private Double quantidadeProduzido;
+		
+	private List<LoteRacaoDTO> lstLoteRacao = new ArrayList<>();
 	
 	public RacaoProduzirDTO() {
 		super();
@@ -53,8 +56,9 @@ public class RacaoProduzirDTO implements Serializable{
 		this.descrRacao = pRacaoProduzir.getRacao().getDescricao();
 		this.idOrdemProducaoRacao = pRacaoProduzir.getOrdemProducaoRacao().getIdOrdemProducaoRacao();
 		this.quantidade = pRacaoProduzir.getQuantidade();
-		this.lstLoteRacao = pRacaoProduzir.getLstLoteRacao();
-
+		this.lstLoteRacao = pRacaoProduzir.getLstLoteRacao().stream().map(x -> new LoteRacaoDTO(x)).collect(Collectors.toList());
+		this.quantidadeProduzido = pRacaoProduzir.getLstLoteRacao().stream().mapToDouble(LoteRacao::getQuantidade).sum();
 	}
+	
 
 }

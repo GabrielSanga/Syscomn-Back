@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import com.projeto.syscomn.domain.FormulaRacao;
 import com.projeto.syscomn.domain.Racao;
@@ -23,7 +24,14 @@ public class RacaoDTO implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idRacao;
 	
+	@NotNull(message = "Descrição é campo de preenchimento obrigatório!")
 	private String descricao;
+	
+	@NotNull(message = "Dias de Validade é campo de preenchimento obrigatório!")
+	private Integer diasValidade;
+
+	@NotNull(message = "Unidade é campo de preenchimento obrigatório!")
+	private String unidade;
 	
 	private List<FormulaRacao> lstMateriaPrima = new ArrayList<>();
 	
@@ -36,6 +44,8 @@ public class RacaoDTO implements Serializable {
 		this.idRacao = pRacao.getIdRacao();
 		this.descricao = pRacao.getDescricao();
 		this.lstMateriaPrima = pRacao.getLstMateriaPrima();
+		this.diasValidade = pRacao.getDiasValidade();
+		this.unidade =pRacao.getUnidade();
 	}
 	
 }
