@@ -53,8 +53,6 @@ public class Lote implements Serializable{
 	
 	private Integer qtdeCabecasAtual;
 	
-	//private Integer statusLote; 
-	
 	@ManyToOne
 	@JoinColumn(name = "idCurralPiquete")
 	private CurralPiquete curralPiquete;
@@ -80,12 +78,7 @@ public class Lote implements Serializable{
 		this.qtdeCabecasEntrada = pLoteDTO.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLoteDTO.getQtdeCabecasMorte();
 		this.qtdeCabecasAtual = pLoteDTO.getQtdeCabecasAtual();
-		//this.statusLote = pLoteDTO.getStatusLote().getCodigo();
 		this.lstMovimentacao = pLoteDTO.getLstMovimentacao().stream().map(x -> new Movimentacao(x)).collect(Collectors.toList());
 	}
-
-	//public StatusLote getStatusLote() {
-	//	return StatusLote.toEnum(this.statusLote);
-	//}
 	
 }

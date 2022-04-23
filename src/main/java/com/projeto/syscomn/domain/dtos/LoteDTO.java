@@ -54,10 +54,7 @@ public class LoteDTO implements Serializable{
 	
 	@Getter
 	private Integer qtdeCabecasAtual;
-	
-	//@NotNull(message = "Status do Lote é campo de preenchimento obrigatório!")
-	//private Integer statusLote;
-	
+
 	@Getter
 	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
 	private Integer curralPiquete;
@@ -85,13 +82,8 @@ public class LoteDTO implements Serializable{
 		this.qtdeCabecasEntrada = pLote.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLote.getQtdeCabecasMorte();
 		this.qtdeCabecasAtual = pLote.getQtdeCabecasAtual();
-		//this.statusLote = pLote.getStatusLote().getCodigo();
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
 	} 
-	
-	//public StatusLote getStatusLote() {
-	//	return StatusLote.toEnum(this.statusLote);
-	//}	
 }

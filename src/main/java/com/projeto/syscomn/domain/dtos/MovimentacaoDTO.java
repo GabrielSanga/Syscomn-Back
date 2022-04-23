@@ -3,8 +3,6 @@ package com.projeto.syscomn.domain.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.Movimentacao;
 
@@ -21,20 +19,17 @@ public class MovimentacaoDTO implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataHoraMovimentacao = LocalDateTime.now();
 	
-	@NotNull(message = "Lote é campo de preenchimento obrigatório!")
 	private Integer lote; 
 	
-	//@NotNull(message = "Funcionario é campo de preenchimento obrigatório!")
-	//private Integer funcionario;
+	private Integer idPessoa;
 	
-	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
 	private Integer curralPiquete; 
 	
 	@Getter 
-	private String descLote;
+	private String nomePessoa;
 	
-	//@Getter 
-	//private String nomeFuncionario;
+	@Getter 
+	private String descLote;
 	
 	@Getter 
 	private String descCurralPiquete;
@@ -50,12 +45,12 @@ public class MovimentacaoDTO implements Serializable{
 		this.idMovimentacao = pMovimentacao.getIdMovimentacao();
 		this.dataHoraMovimentacao = pMovimentacao.getDataHoraMovimentacao();
 		this.lote = pMovimentacao.getLote().getIdLote();
-		//this.funcionario = pMovimentacao.getFuncionario().getIdPessoa();
 		this.descCurralPiquete = pMovimentacao.getCurralPiquete().getDescricao();
 		this.curralPiquete = pMovimentacao.getCurralPiquete().getIdCurralPiquete();
-		//this.nomeFuncionario = pMovimentacao.getFuncionario().getNomePessoa();
 		this.descLote = pMovimentacao.getLote().getDescricao();
 		this.situacao = pMovimentacao.getSituacao();
+		this.idPessoa = pMovimentacao.getPessoa().getIdPessoa();
+		this.nomePessoa = pMovimentacao.getPessoa().getNomePessoa();
 	}
 	
 }
