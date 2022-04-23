@@ -48,7 +48,8 @@ public class RacaoProduzirService {
 		
 		oRacaoProduzir = newProducao(pRacaoProduzirDTO);
 		
-		return produzirRepository.save(oRacaoProduzir);	}
+		return produzirRepository.save(oRacaoProduzir);	
+	}
 
 	public void delete(Integer id) {
 		RacaoProduzir oRacaoProduzir = findById(id);
