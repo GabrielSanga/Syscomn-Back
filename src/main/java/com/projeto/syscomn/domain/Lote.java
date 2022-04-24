@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.syscomn.domain.dtos.LoteDTO;
+import com.projeto.syscomn.domain.enums.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -53,9 +54,15 @@ public class Lote implements Serializable{
 	
 	private Integer qtdeCabecasAtual;
 	
+	private Integer status;
+	
 	@ManyToOne
 	@JoinColumn(name = "idCurralPiquete")
 	private CurralPiquete curralPiquete;
+	
+	@ManyToOne
+	@JoinColumn(name = "idRegimeEngorda")
+	private RegimeEngorda regimeEngorda;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "lote")
@@ -78,7 +85,12 @@ public class Lote implements Serializable{
 		this.qtdeCabecasEntrada = pLoteDTO.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLoteDTO.getQtdeCabecasMorte();
 		this.qtdeCabecasAtual = pLoteDTO.getQtdeCabecasAtual();
+		this.status = pLoteDTO.getStatus().getCodigo();
 		this.lstMovimentacao = pLoteDTO.getLstMovimentacao().stream().map(x -> new Movimentacao(x)).collect(Collectors.toList());
+	}
+	
+	public Status getStatus() {
+		return Status.toEnum(this.status);
 	}
 	
 }

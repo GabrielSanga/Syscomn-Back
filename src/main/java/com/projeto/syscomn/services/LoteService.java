@@ -12,6 +12,7 @@ import com.projeto.syscomn.domain.CurralPiquete;
 import com.projeto.syscomn.domain.Lote;
 import com.projeto.syscomn.domain.Movimentacao;
 import com.projeto.syscomn.domain.Pessoa;
+import com.projeto.syscomn.domain.RegimeEngorda;
 import com.projeto.syscomn.domain.dtos.LoteDTO;
 import com.projeto.syscomn.repositores.LoteRepository;
 import com.projeto.syscomn.repositores.MovimentacaoRepository;
@@ -25,6 +26,8 @@ public class LoteService {
 	private LoteRepository loteRepository;
 	@Autowired
 	private CurralPiqueteService curralPiqueteService;
+	@Autowired
+	private RegimeEngordaService regimeEngordaService;
 	@Autowired
 	private MovimentacaoService movimentacaoService;
 	@Autowired
@@ -73,7 +76,7 @@ public class LoteService {
 	private Lote newLote(LoteDTO oLoteDTO, boolean pbIsUpdate, Integer pnIdPessoa) {
 		
 		CurralPiquete oCurralPiquete = curralPiqueteService.findById(oLoteDTO.getCurralPiquete());
-				
+		RegimeEngorda oRegimeEngorda = regimeEngordaService.findById(oLoteDTO.getRegimeEngorda());		
 
 		if (pbIsUpdate) {
 			//Adicionando o objeto do Funcionário na Movimentação
@@ -102,6 +105,7 @@ public class LoteService {
 		}
 
 		oLote.setCurralPiquete(oCurralPiquete);
+		oLote.setRegimeEngorda(oRegimeEngorda);
 
 		return oLote;
 	}

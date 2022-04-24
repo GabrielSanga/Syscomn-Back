@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.Lote;
+import com.projeto.syscomn.domain.enums.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -63,6 +64,15 @@ public class LoteDTO implements Serializable{
 	private String descricaoCurralPiquete;
 	
 	@Getter
+	private Integer regimeEngorda; 
+	
+	@Getter 
+	private String descricaoRegimeEngorda;
+	
+	@NotNull(message = "Status é campo de preenchimento obrigatório!")
+	private Integer status;
+	
+	@Getter
 	private List<MovimentacaoDTO> lstMovimentacao = new ArrayList<>();
 	
 	public LoteDTO() {
@@ -84,6 +94,14 @@ public class LoteDTO implements Serializable{
 		this.qtdeCabecasAtual = pLote.getQtdeCabecasAtual();
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
+		this.status = pLote.getStatus().getCodigo();
+		this.regimeEngorda = pLote.getRegimeEngorda().getIdRegimeEngorda();
+		this.descricaoRegimeEngorda = pLote.getRegimeEngorda().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
 	} 
+	
+	public Status getStatus() {
+		return Status.toEnum(this.status);
+	}
+	
 }
