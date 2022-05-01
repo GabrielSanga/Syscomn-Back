@@ -45,6 +45,10 @@ public class AnimalChipService {
 	public List<AnimalChip> findAll() {
 		return animalChipRepository.findAll();
 	}
+	
+	public List<Object> findAllMortos() {
+		return animalChipRepository.findAllMorteMes();
+	}
 
 	public AnimalChip create(@Valid AnimalChipDTO pAnimalChipDTO) {
 		return animalChipRepository.save(newAnimal(pAnimalChipDTO, false));
@@ -97,6 +101,13 @@ public class AnimalChipService {
 				oAnimalChip.setDtaSaida(null);
 				oAnimalChip.setMotivoSaida("");
 			}
+			
+			if(oAnimalChipOld.getTipoMorte() == null && oTipoMorte != null) {
+				oAnimalChip.setDtaSaida(LocalDate.now());
+			}else if(oAnimalChipOld.getTipoMorte() != null &&  oTipoMorte == null) {
+				oAnimalChip.setDtaSaida(null);
+			}
+			
 		}
 		
 		return oAnimalChip;	

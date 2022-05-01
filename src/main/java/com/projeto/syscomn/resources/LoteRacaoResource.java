@@ -45,6 +45,13 @@ public class LoteRacaoResource {
 		return ResponseEntity.ok().body(lstLoteRacaoDTO);
 	}
 	
+	@GetMapping(value = "producaoData")
+	public ResponseEntity<List<Object>> findAllProducaoPorData(){
+		List<Object> lstRetorno = loteRacaoService.findAllProducaoPorData();
+						
+		return ResponseEntity.ok().body(lstRetorno);
+	}
+	
 	@PostMapping
 	public ResponseEntity<LoteRacaoDTO> create(@Valid @RequestBody LoteRacaoDTO pLoteRacaoDTO){
 		//Seta a quantidade como saldo no momento do cadastro

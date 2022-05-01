@@ -37,12 +37,20 @@ public class AnimalChipResource {
 		return ResponseEntity.ok().body(new AnimalChipDTO(oAnimalChip));
 	}
 	
+	
 	@GetMapping
 	public ResponseEntity<List<AnimalChipDTO>> findAll(){
 		List<AnimalChip> lstAnimalChip = animalChipService.findAll();
 		List<AnimalChipDTO> lstAnimalChipDTO = lstAnimalChip.stream().map(x -> new AnimalChipDTO(x)).collect(Collectors.toList());
 				
 		return ResponseEntity.ok().body(lstAnimalChipDTO);
+	}
+	
+	@GetMapping(value = "mortos")
+	public ResponseEntity<List<Object>> findAllQtdMortosMes(){
+		List<Object> lstQtdMorteMes = animalChipService.findAllMortos();
+				
+		return ResponseEntity.ok().body(lstQtdMorteMes);
 	}
 	
 	@PostMapping

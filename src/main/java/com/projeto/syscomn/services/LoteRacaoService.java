@@ -22,14 +22,14 @@ public class LoteRacaoService {
 	
 	@Autowired
 	private LoteRacaoRepository loteRacaoRepository;
+	@Autowired
+	private OrdemProducaoRacaoRepository ordemProducaoRacaoRepository;
 	
 	@Autowired
 	private RacaoProduzirService produzirService;
 	@Autowired
 	private LocalArmazenamentoService armazenamentoService;
-	@Autowired
-	private OrdemProducaoRacaoRepository ordemProducaoRacaoRepository;
-	
+
 
 	public LoteRacao findById(Integer id) {
 		Optional<LoteRacao> oLoteRacao = loteRacaoRepository.findById(id);
@@ -39,6 +39,10 @@ public class LoteRacaoService {
 
 	public List<LoteRacao> findAll() {
 		return loteRacaoRepository.findAll();
+	}
+	
+	public List<Object> findAllProducaoPorData() {
+		return loteRacaoRepository.findAllProducaoPorData();
 	}
 
 	public LoteRacao create(@Valid LoteRacaoDTO pLoteRacaoDTO) {
