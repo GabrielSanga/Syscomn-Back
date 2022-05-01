@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projeto.syscomn.domain.AnimalChip;
-import com.projeto.syscomn.domain.Lote;
 import com.projeto.syscomn.domain.Pesagem;
 import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.AnimalChipDTO;
+import com.projeto.syscomn.domain.dtos.LoteDTO;
 import com.projeto.syscomn.domain.dtos.PesagemDTO;
 import com.projeto.syscomn.repositores.PesagemRepository;
 import com.projeto.syscomn.repositores.PessoaRepository;
@@ -52,13 +52,13 @@ public class PesagemService {
 			
 		}else if(pPesagemDTO.getTipoPesagem().equalsIgnoreCase("L")){
 			//Rateio de Peso		
-			Lote oLote = loteService.findById(pPesagemDTO.getIdLote());
+			LoteDTO oLoteDTO = new LoteDTO(loteService.findById(pPesagemDTO.getIdLote()));
 			
-			Integer qtdAnimaisLote = oLote.getLstAnimais().size();
+			Integer qtdAnimaisLote = oLoteDTO.getLstAnimais().size();
 			
 			Double pesoAnimalUnico = pPesagemDTO.getPeso() / qtdAnimaisLote;
 				
-			for (AnimalChip oAnimalChip : oLote.getLstAnimais()) {
+			for (AnimalChipDTO oAnimalChip : oLoteDTO.getLstAnimais()) {
 				pPesagemDTO.setIdAnimalChip(oAnimalChip.getIdAnimalChip());
 				pPesagemDTO.setPeso(pesoAnimalUnico);
 				

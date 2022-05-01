@@ -55,7 +55,7 @@ public class LoteDTO implements Serializable{
 	private Integer qtdeCabecasMorte;
 	
 	@Getter
-	private Long qtdeCabecasAtual;
+	private Integer qtdeCabecasAtual;
 
 	@Getter
 	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
@@ -91,19 +91,19 @@ public class LoteDTO implements Serializable{
 		this.dataInicio = pLote.getDataInicio();
 		this.dataFinal = pLote.getDataFinal();
 		this.pesoEntrada = pLote.getPesoEntrada();
-		this.pesoAtual = pLote.getLstAnimais().stream().mapToDouble(AnimalChip::getPesoEntrada).sum();
+		this.pesoAtual = pLote.getLstAnimais().stream().filter(x -> x.getTipoMorte() == null).mapToDouble(AnimalChip::getPesoAtual).sum();
 		this.custoLote = pLote.getCustoLote();
 		this.qtdeCabecasEntrada = pLote.getQtdeCabecasEntrada();
-		this.qtdeCabecasMorte = pLote.getQtdeCabecasMorte();
-		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().mapToInt(AnimalChip::getIdAnimalChip).count();
+		this.qtdeCabecasMorte = pLote.getLstAnimais().stream().filter(x -> x.getTipoMorte() != null).collect(Collectors.toList()).size();		
+		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().filter(x -> x.getTipoMorte() == null).collect(Collectors.toList()).size();		
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
 		this.status = pLote.getStatus().getCodigo();
 		this.regimeEngorda = pLote.getRegimeEngorda().getIdRegimeEngorda();
 		this.descricaoRegimeEngorda = pLote.getRegimeEngorda().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
-		this.lstAnimais = pLote.getLstAnimais().stream().map(x -> new AnimalChipDTO(x)).collect(Collectors.toList());
-	} 
+		this.lstAnimais = pLote.getLstAnimais().stream().map(x -> new AnimalChipDTO(x)).filter(x -> x.getIdTipoMorte() == null).collect(Collectors.toList());
+	}
 	
 	public Status getStatus() {
 		return Status.toEnum(this.status);

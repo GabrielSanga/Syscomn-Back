@@ -33,6 +33,7 @@ public class AnimalChipDTO implements Serializable{
 	@NotNull(message = "Data da Entrada é campo de preenchimento obrigatório!")
 	private LocalDate dtaEntrada;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dtaSaida;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
