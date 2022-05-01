@@ -44,15 +44,11 @@ public class Lote implements Serializable{
 	
 	private Double pesoEntrada;
 	
-	private Double pesoAtual;
-	
 	private Double custoLote;
 	
 	private Integer qtdeCabecasEntrada;
 	
 	private Integer qtdeCabecasMorte;
-	
-	private Integer qtdeCabecasAtual;
 	
 	private Integer status;
 	
@@ -67,6 +63,10 @@ public class Lote implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "lote")
 	private List<Movimentacao> lstMovimentacao = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "lote")
+	private List<AnimalChip> lstAnimalChip = new ArrayList<>();
 
 	public Lote() {
 		super();
@@ -80,13 +80,12 @@ public class Lote implements Serializable{
 		this.dataInicio = pLoteDTO.getDataInicio();
 		this.dataFinal = pLoteDTO.getDataFinal();
 		this.pesoEntrada = pLoteDTO.getPesoEntrada();
-		this.pesoAtual = pLoteDTO.getPesoAtual();
 		this.custoLote = pLoteDTO.getCustoLote();
 		this.qtdeCabecasEntrada = pLoteDTO.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLoteDTO.getQtdeCabecasMorte();
-		this.qtdeCabecasAtual = pLoteDTO.getQtdeCabecasAtual();
 		this.status = pLoteDTO.getStatus().getCodigo();
 		this.lstMovimentacao = pLoteDTO.getLstMovimentacao().stream().map(x -> new Movimentacao(x)).collect(Collectors.toList());
+		this.lstAnimalChip = pLoteDTO.getLstAnimalChip().stream().map(x -> new AnimalChip(x)).collect(Collectors.toList());
 	}
 	
 	public Status getStatus() {

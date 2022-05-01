@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.domain.AnimalChip;
 import com.projeto.syscomn.domain.Lote;
+import com.projeto.syscomn.domain.LoteRacao;
+import com.projeto.syscomn.domain.Movimentacao;
 import com.projeto.syscomn.domain.enums.Status;
 
 import lombok.Getter;
@@ -75,6 +78,9 @@ public class LoteDTO implements Serializable{
 	@Getter
 	private List<MovimentacaoDTO> lstMovimentacao = new ArrayList<>();
 	
+	@Getter
+	private List<AnimalChipDTO> lstAnimalChip = new ArrayList<>();
+	
 	public LoteDTO() {
 		super();
 	}
@@ -87,11 +93,11 @@ public class LoteDTO implements Serializable{
 		this.dataInicio = pLote.getDataInicio();
 		this.dataFinal = pLote.getDataFinal();
 		this.pesoEntrada = pLote.getPesoEntrada();
-		this.pesoAtual = pLote.getPesoAtual();
+		this.pesoAtual = pLote.getLstAnimalChip().stream().mapToDouble(AnimalChip::getPesoEntrada).sum();
 		this.custoLote = pLote.getCustoLote();
 		this.qtdeCabecasEntrada = pLote.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLote.getQtdeCabecasMorte();
-		this.qtdeCabecasAtual = pLote.getQtdeCabecasAtual();
+		this.qtdeCabecasAtual = pLote.getLstAnimalChip().stream().mapToInt(AnimalChip::getIdAnimalChip).sum();
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
 		this.status = pLote.getStatus().getCodigo();
