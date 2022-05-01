@@ -2,11 +2,13 @@ package com.projeto.syscomn.domain.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.AnimalChip;
 
 import lombok.Getter;
@@ -33,6 +35,9 @@ public class AnimalChipDTO implements Serializable{
 	
 	private LocalDate dtaSaida;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dtaHoraUltimaPesagem;
+	
 	private String pai;
 	
 	private String mae;
@@ -44,6 +49,8 @@ public class AnimalChipDTO implements Serializable{
 	
 	@NotNull(message = "Peso de Entrada é campo de preenchimento obrigatório!")
 	private Double pesoEntrada;
+	
+	private Double pesoAtual;
 	
     private String motivoSaida;
     
@@ -83,11 +90,13 @@ public class AnimalChipDTO implements Serializable{
 		this.dtaNascimento = pAnimalChip.getDtaNascimento();
 		this.dtaEntrada = pAnimalChip.getDtaEntrada();
 		this.dtaSaida = pAnimalChip.getDtaSaida();
+		this.dtaHoraUltimaPesagem = pAnimalChip.getDtaHoraUltimaPesagem();
 		this.pai = pAnimalChip.getPai();
 		this.mae = pAnimalChip.getMae();
 		this.custoAquisicao = pAnimalChip.getCustoAquisicao();
 		this.custoFinal = pAnimalChip.getCustoFinal();
 		this.pesoEntrada = pAnimalChip.getPesoEntrada();
+		this.pesoAtual = pAnimalChip.getPesoAtual();
 		this.motivoSaida = pAnimalChip.getMotivoSaida();
 		this.status = pAnimalChip.getStatus();
 		this.ganhoMedioDiario = pAnimalChip.getGanhoMedioDiario();

@@ -15,6 +15,7 @@ import com.projeto.syscomn.domain.Pessoa;
 import com.projeto.syscomn.domain.dtos.OrdemProducaoRacaoDTO;
 import com.projeto.syscomn.repositores.OrdemProducaoRacaoRepository;
 import com.projeto.syscomn.repositores.PessoaRepository;
+import com.projeto.syscomn.services.exceptions.DataIntegrityViolationException;
 import com.projeto.syscomn.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -69,6 +70,10 @@ public class OrdemProducaoRacaoService {
 
 	public void delete(Integer id) {
 		OrdemProducaoRacao oOrdemProducaoRacao = findById(id);
+		
+		if(oOrdemProducaoRacao.getLstRacaoProduzir().size() > 0) {
+			throw new DataIntegrityViolationException("Existem Rações a Produzir vinculadas a essa Ordem de Produção, não é possível exclui-la!");
+		}
 
 		ordemProducaoRepository.deleteById(oOrdemProducaoRacao.getIdOrdemProducaoRacao());
 	}

@@ -2,6 +2,7 @@ package com.projeto.syscomn.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.dtos.AnimalChipDTO;
 
 import lombok.Getter;
@@ -37,6 +39,9 @@ public class AnimalChip implements Serializable {
 	
 	private LocalDate dtaSaida;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dtaHoraUltimaPesagem;
+	
 	private String pai;
 	
 	private String mae;
@@ -46,6 +51,8 @@ public class AnimalChip implements Serializable {
 	private Double custoFinal;
 	
 	private Double pesoEntrada;
+	
+	private Double pesoAtual;
 	
     private String motivoSaida;
     
@@ -85,11 +92,13 @@ public class AnimalChip implements Serializable {
 		this.dtaNascimento = pAnimalChipDTO.getDtaNascimento();
 		this.dtaEntrada = pAnimalChipDTO.getDtaEntrada();
 		this.dtaSaida = pAnimalChipDTO.getDtaSaida();
+		this.dtaHoraUltimaPesagem = pAnimalChipDTO.getDtaHoraUltimaPesagem();
 		this.pai = pAnimalChipDTO.getPai();
 		this.mae = pAnimalChipDTO.getMae();
 		this.custoAquisicao = pAnimalChipDTO.getCustoAquisicao();
 		this.custoFinal = pAnimalChipDTO.getCustoFinal();
 		this.pesoEntrada = pAnimalChipDTO.getPesoEntrada();
+		this.pesoAtual = pAnimalChipDTO.getPesoAtual();
 		this.motivoSaida = pAnimalChipDTO.getMotivoSaida();
 		this.status = pAnimalChipDTO.getStatus();
 		this.ganhoMedioDiario = pAnimalChipDTO.getGanhoMedioDiario();

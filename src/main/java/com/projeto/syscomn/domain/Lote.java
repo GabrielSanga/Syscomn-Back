@@ -60,6 +60,10 @@ public class Lote implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy = "lote")
 	private List<Movimentacao> lstMovimentacao = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "lote")
+	private List<AnimalChip> lstAnimais = new ArrayList<>();
 
 	public Lote() {
 		super();

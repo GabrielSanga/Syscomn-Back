@@ -65,6 +65,9 @@ public class LoteDTO implements Serializable{
 	@Getter
 	private List<MovimentacaoDTO> lstMovimentacao = new ArrayList<>();
 	
+	@Getter
+	private List<AnimalChipDTO> lstAnimais = new ArrayList<>();
+	
 	public LoteDTO() {
 		super();
 	}
@@ -85,5 +88,6 @@ public class LoteDTO implements Serializable{
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
+		this.lstAnimais = pLote.getLstAnimais().stream().map(x -> new AnimalChipDTO(x)).collect(Collectors.toList());
 	} 
 }

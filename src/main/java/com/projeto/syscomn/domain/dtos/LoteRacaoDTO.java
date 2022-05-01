@@ -34,6 +34,9 @@ public class LoteRacaoDTO {
 	@NotNull(message = "Ração é campo de preenchimento obrigatório!")
 	private Integer idRacaoProduzir;
 	
+	private Integer idRacao;
+	private String descrRacao;
+	
 	@NotNull(message = "Local de Armazenamento é campo de preenchimento obrigatório!")
 	private Integer idLocalArmazenamento;
 	private String descrLocalArmazenamento;
@@ -52,6 +55,8 @@ public class LoteRacaoDTO {
 		this.custo = pLoteRacao.getCusto();
 		this.unidade = pLoteRacao.getRacaoProduzir().getRacao().getUnidade();
 		this.idRacaoProduzir = pLoteRacao.getRacaoProduzir().getIdRacaoProduzir();
+		this.idRacao = pLoteRacao.getRacaoProduzir().getRacao().getIdRacao();
+		this.descrRacao = pLoteRacao.getRacaoProduzir().getRacao().getDescricao();
 		this.idLocalArmazenamento = pLoteRacao.getLocalArmazenamento().getIdLocalArmazenamento();
 		this.descrLocalArmazenamento = pLoteRacao.getLocalArmazenamento().getDescricao();
 	}

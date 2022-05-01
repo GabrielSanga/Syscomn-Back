@@ -65,6 +65,6 @@ public class RacaoProduzir implements Serializable{
 		this.ordemProducaoRacao = pOrdemProducao;
 		this.racao = pRacao;
 		this.quantidade = pRacaoProduzirDTO.getQuantidade();
-	}	
-
+	}
+	
 }

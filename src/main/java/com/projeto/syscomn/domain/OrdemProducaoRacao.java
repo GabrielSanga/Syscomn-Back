@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projeto.syscomn.domain.dtos.OrdemProducaoRacaoDTO;
 
 import lombok.Getter;
@@ -41,7 +40,6 @@ public class OrdemProducaoRacao implements Serializable{
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "ordemProducaoRacao")
 	private List<RacaoProduzir> lstRacaoProduzir = new ArrayList<>();
 
@@ -55,7 +53,7 @@ public class OrdemProducaoRacao implements Serializable{
 		this.descricao = pOrdemProducaoRacaoDTO.getDescricao();
 		this.data = pOrdemProducaoRacaoDTO.getData();
 		this.valorOrdemProducao = pOrdemProducaoRacaoDTO.getValorOrdemProducao();
-		this.status = pOrdemProducaoRacaoDTO.getStatus();
+		this.status = pOrdemProducaoRacaoDTO.getStatus();		
 	}	
 
 }
