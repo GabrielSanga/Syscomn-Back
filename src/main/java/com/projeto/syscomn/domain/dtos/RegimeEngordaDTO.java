@@ -1,9 +1,12 @@
 package com.projeto.syscomn.domain.dtos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.projeto.syscomn.domain.Lote;
 import com.projeto.syscomn.domain.RegimeEngorda;
 
 import lombok.Getter;
@@ -18,6 +21,9 @@ public class RegimeEngordaDTO implements Serializable {
 
 	@NotNull(message = "Descrição é campo de preenchimento obrigatório!")
 	protected String descricao;
+	
+	@Getter
+	private List<Lote> lstLote = new ArrayList<>();
 
 	public RegimeEngordaDTO() {}
 	

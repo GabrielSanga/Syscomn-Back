@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.projeto.syscomn.domain.AnimalChip;
 import com.projeto.syscomn.domain.Lote;
+import com.projeto.syscomn.domain.enums.Status;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -63,11 +65,20 @@ public class LoteDTO implements Serializable{
 	private String descricaoCurralPiquete;
 	
 	@Getter
+	private Integer regimeEngorda; 
+	
+	@Getter 
+	private String descricaoRegimeEngorda;
+	
+	@NotNull(message = "Status é campo de preenchimento obrigatório!")
+	private Integer status;
+	
+	@Getter
 	private List<MovimentacaoDTO> lstMovimentacao = new ArrayList<>();
 	
 	@Getter
 	private List<AnimalChipDTO> lstAnimais = new ArrayList<>();
-	
+
 	public LoteDTO() {
 		super();
 	}
@@ -80,14 +91,22 @@ public class LoteDTO implements Serializable{
 		this.dataInicio = pLote.getDataInicio();
 		this.dataFinal = pLote.getDataFinal();
 		this.pesoEntrada = pLote.getPesoEntrada();
-		this.pesoAtual = pLote.getPesoAtual();
+		this.pesoAtual = pLote.getLstAnimais().stream().mapToDouble(AnimalChip::getPesoEntrada).sum();
 		this.custoLote = pLote.getCustoLote();
 		this.qtdeCabecasEntrada = pLote.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLote.getQtdeCabecasMorte();
-		this.qtdeCabecasAtual = pLote.getQtdeCabecasAtual();
+		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().mapToInt(AnimalChip::getIdAnimalChip).sum();
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
+		this.status = pLote.getStatus().getCodigo();
+		this.regimeEngorda = pLote.getRegimeEngorda().getIdRegimeEngorda();
+		this.descricaoRegimeEngorda = pLote.getRegimeEngorda().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
 		this.lstAnimais = pLote.getLstAnimais().stream().map(x -> new AnimalChipDTO(x)).collect(Collectors.toList());
 	} 
+	
+	public Status getStatus() {
+		return Status.toEnum(this.status);
+	}
+	
 }
