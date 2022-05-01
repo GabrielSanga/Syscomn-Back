@@ -55,7 +55,7 @@ public class LoteDTO implements Serializable{
 	private Integer qtdeCabecasMorte;
 	
 	@Getter
-	private Integer qtdeCabecasAtual;
+	private Long qtdeCabecasAtual;
 
 	@Getter
 	@NotNull(message = "Curral Piquete é campo de preenchimento obrigatório!")
@@ -95,7 +95,7 @@ public class LoteDTO implements Serializable{
 		this.custoLote = pLote.getCustoLote();
 		this.qtdeCabecasEntrada = pLote.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLote.getQtdeCabecasMorte();
-		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().mapToInt(AnimalChip::getIdAnimalChip).sum();
+		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().mapToInt(AnimalChip::getIdAnimalChip).count();
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
 		this.status = pLote.getStatus().getCodigo();

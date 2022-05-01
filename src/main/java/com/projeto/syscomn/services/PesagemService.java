@@ -46,7 +46,7 @@ public class PesagemService {
 	public Pesagem create(@Valid PesagemDTO pPesagemDTO) {
 		Pesagem oPesagem = null;
 		
-		if(pPesagemDTO.getTipoPesagem() == "A") {
+		if(pPesagemDTO.getTipoPesagem().equalsIgnoreCase("A")) {
 			
 			oPesagem =  pesagemRepository.save(newPesagem(pPesagemDTO));
 			
