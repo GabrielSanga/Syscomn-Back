@@ -51,6 +51,7 @@ public class AnimalChipDTO implements Serializable{
 	@NotNull(message = "Peso de Entrada é campo de preenchimento obrigatório!")
 	private Double pesoEntrada;
 	
+	@JsonFormat(pattern = "###.000,000")
 	private Double pesoAtual;
 	
     private String motivoSaida;

@@ -21,6 +21,7 @@ public class PesagemDTO implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime data = LocalDateTime.now();
 	
+	@JsonFormat(pattern = "###.000,000")
 	@NotNull(message = "Peso é campo de preenchimento obrigatório!")
 	private Double peso;
 	
