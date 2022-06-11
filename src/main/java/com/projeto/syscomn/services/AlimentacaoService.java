@@ -89,8 +89,6 @@ public class AlimentacaoService {
 		AnimalChip oAnimalChip = animalChipService.findById(pAlimentacaoDTO.getIdAnimalChip());
 		Pessoa oPessoa = pessoaRespoRepository.findById(pAlimentacaoDTO.getIdPessoa()).get();
 		
-		oAnimalChip = animalChipService.update(new AnimalChipDTO(oAnimalChip), oAnimalChip.getIdAnimalChip());			
-		
 		if (oAnimalChip == null || oPessoa == null) { return null; }
 				
 		Alimentacao oAlimentacao = new Alimentacao(pAlimentacaoDTO);
