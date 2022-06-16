@@ -37,7 +37,6 @@ public class AnimalChipResource {
 		return ResponseEntity.ok().body(new AnimalChipDTO(oAnimalChip));
 	}
 	
-	
 	@GetMapping
 	public ResponseEntity<List<AnimalChipDTO>> findAll(){
 		List<AnimalChip> lstAnimalChip = animalChipService.findAll();

@@ -9,7 +9,7 @@ import com.projeto.syscomn.domain.AnimalChip;
 
 public interface AnimalChipRepository extends JpaRepository<AnimalChip, Integer>{
 	
-	@Query("Select Count(*) As Qtd, Extract('Month' From A.dtaSaida) "
+	@Query("Select Count(*) As Qtd, Extract('Month' From A.dtaSaida)"
 			+ "From AnimalChip A  "
 			+ "Where tipoMorte > 0 "
 			+ "And Extract('Year' From A.dtaSaida) = Extract('Year' From Now()) "
