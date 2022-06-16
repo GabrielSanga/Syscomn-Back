@@ -45,6 +45,14 @@ public class LoteRacaoResource {
 		return ResponseEntity.ok().body(lstLoteRacaoDTO);
 	}
 	
+	@GetMapping(value = "producaoEstoque")
+	public ResponseEntity<List<LoteRacaoDTO>> findAllEstoque(){
+		List<LoteRacao> lstLoteRacao = loteRacaoService.findAll();
+		List<LoteRacaoDTO> lstLoteRacaoDTO = lstLoteRacao.stream().map(x -> new LoteRacaoDTO(x)).filter(x -> x.getSaldo() > 0).collect(Collectors.toList());
+				
+		return ResponseEntity.ok().body(lstLoteRacaoDTO);
+	}
+	
 	@GetMapping(value = "producaoData")
 	public ResponseEntity<List<Object>> findAllProducaoPorData(){
 		List<Object> lstRetorno = loteRacaoService.findAllProducaoPorData();

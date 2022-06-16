@@ -38,6 +38,10 @@ public class Alimentacao implements Serializable{
 	private AnimalChip animalChip;
 	
 	@ManyToOne
+	@JoinColumn(name = "idLoteRacao")
+	private LoteRacao loteRacao;
+	
+	@ManyToOne
 	@JoinColumn(name = "idPessoa")
 	private Pessoa pessoa;
 

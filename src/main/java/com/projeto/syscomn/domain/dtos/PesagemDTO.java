@@ -36,6 +36,7 @@ public class PesagemDTO implements Serializable {
 	private Integer idAnimalChip;
 	
 	private Integer idPessoa;
+	private String nomePessoa;
 	
 	private Integer idLote;
 
@@ -50,6 +51,8 @@ public class PesagemDTO implements Serializable {
 		this.peso = pPesagem.getPeso();
 		this.observacao = pPesagem.getObservacao();
 		this.idAnimalChip = pPesagem.getAnimalChip().getIdAnimalChip();
+		this.idPessoa = pPesagem.getPessoa().getIdPessoa();
+		this.nomePessoa = pPesagem.getPessoa().getNomePessoa();
 	}
 		
 }

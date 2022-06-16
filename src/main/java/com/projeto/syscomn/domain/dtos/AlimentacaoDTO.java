@@ -33,10 +33,16 @@ public class AlimentacaoDTO implements Serializable {
 	private Integer idAnimalChip;
 
 	private Integer idPessoa;
+	private String nomePessoa;
 	
 	private String tipoAlimentacao;
 	
 	private Integer idLote;
+	
+	private Integer idLoteRacao;
+	
+	private Integer idRacao;
+	private String descrRacao;
 
 	public AlimentacaoDTO() {
 		super();
@@ -50,6 +56,11 @@ public class AlimentacaoDTO implements Serializable {
 		this.custo = pAlimentacao.getCusto();
 		this.idAnimalChip = pAlimentacao.getAnimalChip().getIdAnimalChip();
 		this.idPessoa = pAlimentacao.getPessoa().getIdPessoa();
+		this.nomePessoa = pAlimentacao.getPessoa().getNomePessoa();
+		if(pAlimentacao.getLoteRacao() != null) {
+			this.idRacao = pAlimentacao.getLoteRacao().getRacaoProduzir().getRacao().getIdRacao();
+			this.descrRacao = pAlimentacao.getLoteRacao().getRacaoProduzir().getRacao().getDescricao();
+		}
 	}
 
 }

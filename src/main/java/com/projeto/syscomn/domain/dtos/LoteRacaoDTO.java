@@ -51,6 +51,7 @@ public class LoteRacaoDTO {
 		this.idLoteRacao = pLoteRacao.getIdLoteRacao();
 		this.dataFabricacao = pLoteRacao.getDataFabricacao();
 		this.dataValidade = pLoteRacao.getDataValidade();
+		this.quantidade = pLoteRacao.getQuantidade();
 		this.saldo = pLoteRacao.getSaldo();
 		this.custo = pLoteRacao.getCusto();
 		this.unidade = pLoteRacao.getRacaoProduzir().getRacao().getUnidade();

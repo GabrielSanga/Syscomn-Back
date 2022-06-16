@@ -35,8 +35,10 @@ public class VacinacaoDTO implements Serializable {
 	private Integer idAnimalChip;
 
 	private Integer idPessoa;
+	private String nomePessoa;
 	
 	private Integer idVacina;
+	private String nomeVacina;
 
 	public VacinacaoDTO() {
 		super();
@@ -51,7 +53,9 @@ public class VacinacaoDTO implements Serializable {
 		this.custoDose = pVacinacao.getCustoDose();
 		this.idAnimalChip = pVacinacao.getAnimalChip().getIdAnimalChip();
 		this.idPessoa = pVacinacao.getPessoa().getIdPessoa();
+		this.nomePessoa = pVacinacao.getPessoa().getNomePessoa();
 		this.idVacina = pVacinacao.getVacina().getIdVacina();
+		this.nomeVacina = pVacinacao.getVacina().getNomeVacina();
 	}
 	
 }

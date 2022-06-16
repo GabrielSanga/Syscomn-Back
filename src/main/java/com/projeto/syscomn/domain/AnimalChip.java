@@ -3,6 +3,8 @@ package com.projeto.syscomn.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.dtos.AnimalChipDTO;
@@ -79,6 +82,15 @@ public class AnimalChip implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idTipoMorte")
     private TipoMorte tipoMorte;
+	
+	@OneToMany(mappedBy = "animalChip")
+	private List<Alimentacao> lstAlimentacao = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "animalChip")
+	private List<Pesagem> lstPesagem = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "animalChip")
+	private List<Vacinacao> lstVacinacao = new ArrayList<>();
 
 	public AnimalChip() {
 		super();
