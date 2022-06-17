@@ -24,6 +24,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.enums.Perfil;
 import com.projeto.syscomn.interfaces.CnpjGroup;
 import com.projeto.syscomn.interfaces.CpfGroup;
@@ -55,6 +56,7 @@ public abstract class Pessoa implements Serializable{
 	
 	protected String emailPessoa;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dtaNascimentoPessoa;
 	
 	protected String enderecoPessoa;

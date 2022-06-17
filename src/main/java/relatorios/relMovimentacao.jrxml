@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relMovimentacao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0da6fd04-6874-4dac-bd8a-a761b11056e9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Banco_Syscomn"/>
+	<queryString language="SQL">
+		<![CDATA[select MV.id_movimentacao, MV.data_hora_movimentacao, 
+CASE MV.situacao WHEN 0 THEN 'Atual' WHEN 1 THEN 'Encerrado' End As situacao, 
+CP.descricao As id_curral_piquete, 
+LT.descricao As id_lote, 
+PS.nome_pessoa As id_pessoa
+ from Movimentacao MV, Pessoa PS, Curral_Piquete CP, Lote LT
+ Where MV.id_pessoa = PS.id_pessoa
+ And MV.id_curral_piquete = CP.id_curral_piquete
+ And MV.id_lote = LT.id_lote]]>
+	</queryString>
+	<field name="id_movimentacao" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_movimentacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_movimentacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimentacao"/>
+	</field>
+	<field name="data_hora_movimentacao" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_hora_movimentacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_hora_movimentacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimentacao"/>
+	</field>
+	<field name="situacao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="situacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="situacao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimentacao"/>
+	</field>
+	<field name="id_curral_piquete" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="id_curral_piquete"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_curral_piquete"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="curral_piquete"/>
+	</field>
+	<field name="id_lote" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="id_lote"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_lote"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="lote"/>
+	</field>
+	<field name="id_pessoa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="id_pessoa"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_pessoa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="557" height="49" uuid="0b24429c-481c-445a-9e63-9d1a046b1d97"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="10" width="546" height="30" uuid="aa70f839-061b-4d71-aab3-2738c278bacb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="18"/>
+				</textElement>
+				<text><![CDATA[Relatório de Movimentação]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="50" height="30" uuid="f6499023-6ff0-40ee-8b44-5f915ff1d6e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6aac9eaa-d632-4341-98cf-63be2babf0f6"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="90" height="30" uuid="fff03db4-bc40-4c3c-acd2-d817a525ac96">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66d405ba-2aa4-4eb8-8914-803119c76d76"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Data-Hora Movimentação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="10" width="50" height="30" uuid="52abdce4-457d-4f8e-bddc-5150584f7f08">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d60345cb-0d89-4fa2-9b0e-b344fa035e59"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="10" width="130" height="30" uuid="a09b3d31-538e-471e-97d2-78b009d5215c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac9c73b3-376f-4415-a242-7f3e05b20065"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="10" width="124" height="30" uuid="9cae410a-4ae6-49dd-bf9c-9f444e2b7d04">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48cbbe85-cffd-4044-87bd-2d7cef62eeeb"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Funcionário]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="556" height="1" uuid="8d35cc0c-be10-40ef-9bda-e3494e5f83e5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="50" height="30" uuid="79755670-60cd-48a3-bcf3-fe1d95c466b9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6aac9eaa-d632-4341-98cf-63be2babf0f6"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_movimentacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="90" height="30" uuid="1e0d1c35-05b6-484c-a752-9bcd4c6ae226">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="66d405ba-2aa4-4eb8-8914-803119c76d76"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data_hora_movimentacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="51" height="30" uuid="404d5636-9e0c-438b-b1cf-bf7a5c251347">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d60345cb-0d89-4fa2-9b0e-b344fa035e59"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="130" height="30" uuid="6d7b328b-1764-4a3f-8434-b3a5b97802c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac9c73b3-376f-4415-a242-7f3e05b20065"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="124" height="30" uuid="a996799c-2459-4eac-9bc8-9138f57e75c8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="48cbbe85-cffd-4044-87bd-2d7cef62eeeb"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_pessoa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="39">
+			<staticText>
+				<reportElement x="0" y="0" width="558" height="39" uuid="980fdf03-18ff-42d7-896a-4bca08794e62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="9"/>
+				</textElement>
+				<text><![CDATA[Todos os Direitos Reservados à SYSCOMN 2022 - Versão 1.0.0]]></text>
+			</staticText>
+			<image>
+				<reportElement x="440" y="5" width="43" height="29" uuid="e5f1d7fa-fa7a-4b3e-bad9-93088f49bb9f"/>
+				<imageExpression><![CDATA["C:/syscomnFrontF/Syscomn-Front/src/assets/images/boi-removebg.png"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+</jasperReport>

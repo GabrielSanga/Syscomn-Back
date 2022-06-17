@@ -1,13 +1,18 @@
 package com.projeto.syscomn.resources;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.syscomn.domain.Lote;
+import com.projeto.syscomn.domain.MovimentacaoReport;
 import com.projeto.syscomn.domain.dtos.LoteDTO;
 import com.projeto.syscomn.domain.dtos.UsuarioDTO;
 import com.projeto.syscomn.security.JWTUtil;
 import com.projeto.syscomn.services.LoteService;
+import com.projeto.syscomn.services.reportService;
 
 @RestController
 @RequestMapping(value = "lote")
@@ -33,6 +40,8 @@ public class LoteResource {
 	private LoteService loteService;
 	@Autowired
 	private JWTUtil jwtUtil;
+	@Autowired
+	private reportService reportService;
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<LoteDTO> findById(@PathVariable Integer id){
@@ -75,6 +84,31 @@ public class LoteResource {
 		loteService.delete(id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(value="/relatorios", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorio(HttpServletRequest request) throws Exception{
+		byte[] pdf = reportService.gerarRelatorio("relMovimentacao", new HashMap() , 
+				request.getServletContext());
+		
+		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
+		
+		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/relatorios", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorioParam(HttpServletRequest request, @RequestBody MovimentacaoReport movimentacaoReport) throws Exception{
+		
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("DATA_INICIO", movimentacaoReport.getDataInicio());
+		params.put("DATA_FIM", movimentacaoReport.getDataFim());
+		
+		byte[] pdf = reportService.gerarRelatorio("relMovimentacao-param", params, request.getServletContext());
+		
+		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
+		
+		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
 	}
 
 }
