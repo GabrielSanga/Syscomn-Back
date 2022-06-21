@@ -1,8 +1,10 @@
 package com.projeto.syscomn.domain.dtos;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import com.projeto.syscomn.domain.Pessoa;
+import com.projeto.syscomn.domain.enums.Perfil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +20,7 @@ public class UsuarioDTO  implements Serializable{
     private String senhaAntiga;
     private String senha;
     private Integer idUsuarioAlteracao;
+    private Set<Perfil> roles;
     
     public UsuarioDTO() {}
    
@@ -26,6 +29,7 @@ public class UsuarioDTO  implements Serializable{
 		this.idUsuario = pPessoa.getIdPessoa();
 		this.nomeUsuario = pPessoa.getNomePessoa();
 		this.foto = pPessoa.getFotoPessoa();
+		this.roles = pPessoa.getPerfis();
 	}
     
 }

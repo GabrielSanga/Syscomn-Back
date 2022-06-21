@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projeto.syscomn.domain.AnimalReport;
 import com.projeto.syscomn.domain.Lote;
+import com.projeto.syscomn.domain.LoteReport;
 import com.projeto.syscomn.domain.MovimentacaoReport;
 import com.projeto.syscomn.domain.dtos.LoteDTO;
 import com.projeto.syscomn.domain.dtos.UsuarioDTO;
@@ -96,6 +98,17 @@ public class LoteResource {
 		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/relatorioLoteSem", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorioLote(HttpServletRequest request) throws Exception{
+		byte[] pdf = reportService.gerarRelatorio("relLote", new HashMap() , 
+				request.getServletContext());
+		
+		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
+		
+		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
+	}
+	
+	
 	@PostMapping(value="/relatorios", produces = "application/text")
 	public ResponseEntity<String> dowloadRelatorioParam(HttpServletRequest request, @RequestBody MovimentacaoReport movimentacaoReport) throws Exception{
 		
@@ -110,5 +123,22 @@ public class LoteResource {
 		
 		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
 	}
+	
+	@PostMapping(value="/relatorioLote", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorioParam(HttpServletRequest request, @RequestBody LoteReport loteReport) throws Exception{
+		
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("NRO_LOTE", loteReport.getNroLote());
+		
+		
+		byte[] pdf = reportService.gerarRelatorio("relLote", params, request.getServletContext());
+		
+		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
+		
+		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
+	}
+	
+	
 
 }
