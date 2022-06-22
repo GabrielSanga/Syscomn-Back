@@ -10,7 +10,7 @@ public class MyConfiguration implements WebMvcConfigurer {
 	  @Override
 	    public void addCorsMappings(CorsRegistry registry) {
 	        registry.addMapping("/**")
-	            .allowedOrigins("https://syscomn.herokuapp.com/")
+	            .allowedOrigins("https://syscomn.herokuapp.com")
 	            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
 	    }
 	  
