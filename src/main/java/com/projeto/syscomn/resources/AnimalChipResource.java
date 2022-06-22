@@ -87,8 +87,7 @@ public class AnimalChipResource {
 	
 	@GetMapping(value="/relatorios", produces = "application/text")
 	public ResponseEntity<String> dowloadRelatorio(HttpServletRequest request) throws Exception{
-		byte[] pdf = reportService.gerarRelatorio("relAnimal", new HashMap() , 
-				request.getServletContext());
+		byte[] pdf = reportService.gerarRelatorio("relAnimal", new HashMap(), request.getServletContext());
 		
 		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
 		
