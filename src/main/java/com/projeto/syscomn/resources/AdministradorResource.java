@@ -23,7 +23,6 @@ import com.projeto.syscomn.domain.Administrador;
 import com.projeto.syscomn.domain.dtos.AdministradorDTO;
 import com.projeto.syscomn.services.AdministradorService;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "administrador")
 public class AdministradorResource {
