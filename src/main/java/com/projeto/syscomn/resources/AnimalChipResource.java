@@ -1,12 +1,17 @@
 package com.projeto.syscomn.resources;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projeto.syscomn.domain.AnimalChip;
+import com.projeto.syscomn.domain.AnimalReport;
+import com.projeto.syscomn.domain.MovimentacaoReport;
 import com.projeto.syscomn.domain.dtos.AnimalChipDTO;
 import com.projeto.syscomn.services.AnimalChipService;
+import com.projeto.syscomn.services.reportService;
 
 @RestController
 @RequestMapping(value = "animalchip")
@@ -28,6 +36,8 @@ public class AnimalChipResource {
 	
 	@Autowired
 	private AnimalChipService animalChipService;
+	@Autowired
+	private reportService reportService;
 	
 
 	@GetMapping(value = "/{id}")
@@ -73,6 +83,21 @@ public class AnimalChipResource {
 		animalChipService.delete(id);
 				
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping(value="/relatorios", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorioParam(HttpServletRequest request, @RequestBody AnimalReport animalReport) throws Exception{
+		
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("RACA", animalReport.getRaca());
+		
+		
+		byte[] pdf = reportService.gerarRelatorio("relAnimal", params, request.getServletContext());
+		
+		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
+		
+		return new ResponseEntity<String>(base64Pdf, HttpStatus.OK);
 	}
 
 }

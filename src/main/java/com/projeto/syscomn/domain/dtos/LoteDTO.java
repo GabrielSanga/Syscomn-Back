@@ -70,7 +70,7 @@ public class LoteDTO implements Serializable{
 	@Getter 
 	private String descricaoRegimeEngorda;
 	
-	@NotNull(message = "Status é campo de preenchimento obrigatório!")
+	@Getter
 	private Integer status;
 	
 	@Getter
@@ -98,15 +98,11 @@ public class LoteDTO implements Serializable{
 		this.qtdeCabecasAtual = pLote.getLstAnimais().stream().filter(x -> x.getTipoMorte() == null).collect(Collectors.toList()).size();		
 		this.curralPiquete = pLote.getCurralPiquete().getIdCurralPiquete();
 		this.descricaoCurralPiquete = pLote.getCurralPiquete().getDescricao();
-		this.status = pLote.getStatus().getCodigo();
+		this.status = pLote.getStatus();
 		this.regimeEngorda = pLote.getRegimeEngorda().getIdRegimeEngorda();
 		this.descricaoRegimeEngorda = pLote.getRegimeEngorda().getDescricao();
 		this.lstMovimentacao = pLote.getLstMovimentacao().stream().map(x -> new MovimentacaoDTO(x)).collect(Collectors.toList());
 		this.lstAnimais = pLote.getLstAnimais().stream().map(x -> new AnimalChipDTO(x)).filter(x -> x.getIdTipoMorte() == null).collect(Collectors.toList());
-	}
-	
-	public Status getStatus() {
-		return Status.toEnum(this.status);
 	}
 	
 }

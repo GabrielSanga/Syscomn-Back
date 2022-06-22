@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relAnimal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0da6fd04-6874-4dac-bd8a-a761b11056e9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Banco_Syscomn"/>
+	<parameter name="DATA_INICIO" class="java.lang.String"/>
+	<parameter name="DATA_FIM" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[Select Ac.Chip, Ac.Custo_Aquisicao, Ac.Custo_Final, Ac.Peso_Entrada, Ac.Peso_Atual
+	   ,Case Ac.Status When 0 Then 'Normal' When 1 Then 'Saída' When 2 Then 'Morto' End As status,
+	   Ea.Descricao As DescrEstadoAnimal,
+	   Sa.Descricao As DescrSexoAnimal,
+	   R.Descricao As DescrRaca,
+	   L.Descricao As DescrLote   
+From Animal_chip Ac, Estado_Animal Ea, Sexo_Animal Sa, Lote L, Raca R
+Where Ac.id_estado_animal = Ea.id_estado_animal
+And Ac.id_sexo_animal = Sa.id_sexo_animal
+And Ac.id_lote = L.id_lote
+And Ac.id_raca = R.id_raca
+
+
+
+
+
+
+]]>
+	</queryString>
+	<field name="chip" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="chip"/>
+		<property name="com.jaspersoft.studio.field.label" value="chip"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="animal_chip"/>
+	</field>
+	<field name="custo_aquisicao" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="custo_aquisicao"/>
+		<property name="com.jaspersoft.studio.field.label" value="custo_aquisicao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="animal_chip"/>
+	</field>
+	<field name="custo_final" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="custo_final"/>
+		<property name="com.jaspersoft.studio.field.label" value="custo_final"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="animal_chip"/>
+	</field>
+	<field name="peso_entrada" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="peso_entrada"/>
+		<property name="com.jaspersoft.studio.field.label" value="peso_entrada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="animal_chip"/>
+	</field>
+	<field name="peso_atual" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="peso_atual"/>
+		<property name="com.jaspersoft.studio.field.label" value="peso_atual"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="animal_chip"/>
+	</field>
+	<field name="status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="status"/>
+		<property name="com.jaspersoft.studio.field.label" value="status"/>
+	</field>
+	<field name="descrestadoanimal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descrestadoanimal"/>
+		<property name="com.jaspersoft.studio.field.label" value="descrestadoanimal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estado_animal"/>
+	</field>
+	<field name="descrsexoanimal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descrsexoanimal"/>
+		<property name="com.jaspersoft.studio.field.label" value="descrsexoanimal"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sexo_animal"/>
+	</field>
+	<field name="descrraca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descrraca"/>
+		<property name="com.jaspersoft.studio.field.label" value="descrraca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="raca"/>
+	</field>
+	<field name="descrlote" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descrlote"/>
+		<property name="com.jaspersoft.studio.field.label" value="descrlote"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="lote"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="557" height="49" uuid="0b24429c-481c-445a-9e63-9d1a046b1d97"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="556" height="30" uuid="aa70f839-061b-4d71-aab3-2738c278bacb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="18"/>
+				</textElement>
+				<text><![CDATA[Relatório de Animal]]></text>
+			</staticText>
+			<textField pattern="d/MM/yyyy HH:mm">
+				<reportElement x="460" y="30" width="97" height="19" uuid="7d369f2c-40b7-4ad3-aeb2-935c963fd4c8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="30" width="100" height="19" uuid="cc899b53-a7b9-4624-949b-d70f9960b544"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Data-Hora Emissão:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="50" height="30" uuid="f6499023-6ff0-40ee-8b44-5f915ff1d6e9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6aac9eaa-d632-4341-98cf-63be2babf0f6"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="556" height="1" uuid="8d35cc0c-be10-40ef-9bda-e3494e5f83e5"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="13" width="60" height="27" uuid="6818bc8d-8fdc-4928-a561-b702259bbb6b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b78d746b-d523-4a51-acbf-d20f5d0ef9e9"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Chip]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="11" width="60" height="29" uuid="138f701c-b52e-4e04-a3ba-95d70b64f492">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97e5a5ce-dd92-4297-ab21-e76cfdafdbf0"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Custo Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="11" width="50" height="30" uuid="02f86f21-3fd9-4fde-9e6d-7c04cb9a35ca">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5b25a0cd-6224-4654-9c04-2ee64b4c2bef"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Custo Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="13" width="50" height="27" uuid="999d756c-dfd7-4df7-9dc0-bf15dc57ef00">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b6a4a48-a575-4c76-81a2-54c8aca4a577"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Peso Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="11" width="50" height="30" uuid="276242e6-81cb-4afa-a126-08cd390af8b9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e22cff28-e218-4315-8031-a4df479185ad"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="13" width="60" height="30" uuid="b359fb47-be18-4ad7-8cd1-bf1f17662c60">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="05240a72-a39d-440c-8b49-bec437165e58"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Estado Animal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="10" width="50" height="30" uuid="5a0c1e95-27e3-498a-a6db-eab80257aeaa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="371607c7-fcb1-44ab-ab1c-53e7719365c3"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sexo Animal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="11" width="39" height="30" uuid="e59b4c64-3ef6-4b65-81d3-0fab75ce0d2e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5939d7f2-cbb3-42a8-a0b9-527e10ebb9d4"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Raça]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="11" width="96" height="30" uuid="0f2330cb-4b32-4cf7-bc3e-5cccdc4bede6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d9a62dd-df20-4d9a-99de-563fb8ed7037"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="11" width="40" height="30" uuid="737d6ec9-e6bc-4555-aa20-189addacc616">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c2e188ed-a3a6-4c9a-be4f-a68a79ad2541"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Peso Atual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="30" uuid="da17148d-249c-46a8-8bbf-be2b12d8a868">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b78d746b-d523-4a51-acbf-d20f5d0ef9e9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{chip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="-2" width="60" height="30" uuid="ccfcdd34-20dc-42b4-b7eb-8f6ec2c520af">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="97e5a5ce-dd92-4297-ab21-e76cfdafdbf0"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{custo_aquisicao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="50" height="30" uuid="30b788dd-a9bc-47ff-9e7e-b2d44d5d5923">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5b25a0cd-6224-4654-9c04-2ee64b4c2bef"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{custo_final}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="50" height="30" uuid="35fb6b73-7ec2-4b8f-b525-c07f6f8b99d1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b6a4a48-a575-4c76-81a2-54c8aca4a577"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{peso_entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="-3" width="50" height="30" uuid="277a7ee3-b22f-4ceb-9eae-0d38e57f9ec6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e22cff28-e218-4315-8031-a4df479185ad"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="-2" width="60" height="30" uuid="e2d86296-b1a8-4afa-aa44-028c93330998">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="05240a72-a39d-440c-8b49-bec437165e58"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descrestadoanimal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="-3" width="50" height="30" uuid="3b5b34b6-c2d3-415c-bd17-d06cc3f64159">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="371607c7-fcb1-44ab-ab1c-53e7719365c3"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descrsexoanimal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="39" height="30" uuid="a7f050a9-7304-40c0-b967-ca78e035d6ef">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5939d7f2-cbb3-42a8-a0b9-527e10ebb9d4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descrraca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="98" height="30" uuid="5994c937-efdc-412a-bf6d-b56b40ca377c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d9a62dd-df20-4d9a-99de-563fb8ed7037"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{descrlote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="-3" width="40" height="30" uuid="d371c20f-5167-40ba-9a5f-647de0a763a8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c2e188ed-a3a6-4c9a-be4f-a68a79ad2541"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{peso_atual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="39">
+			<staticText>
+				<reportElement x="0" y="0" width="558" height="39" uuid="980fdf03-18ff-42d7-896a-4bca08794e62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="9"/>
+				</textElement>
+				<text><![CDATA[Todos os Direitos Reservados à SYSCOMN 2022 - Versão 1.0.0]]></text>
+			</staticText>
+			<image>
+				<reportElement x="440" y="5" width="43" height="29" uuid="e5f1d7fa-fa7a-4b3e-bad9-93088f49bb9f"/>
+				<imageExpression><![CDATA["C:/syscomnFrontF/Syscomn-Front/src/assets/images/boi-removebg.png"]]></imageExpression>
+			</image>
+		</band>
+	</lastPageFooter>
+</jasperReport>

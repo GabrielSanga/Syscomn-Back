@@ -83,13 +83,9 @@ public class Lote implements Serializable{
 		this.custoLote = pLoteDTO.getCustoLote();
 		this.qtdeCabecasEntrada = pLoteDTO.getQtdeCabecasEntrada();
 		this.qtdeCabecasMorte = pLoteDTO.getQtdeCabecasMorte();
-		this.status = pLoteDTO.getStatus().getCodigo();
+		this.status = pLoteDTO.getStatus();
 		this.lstMovimentacao = pLoteDTO.getLstMovimentacao().stream().map(x -> new Movimentacao(x)).collect(Collectors.toList());
 		this.lstAnimais = pLoteDTO.getLstAnimais().stream().map(x -> new AnimalChip(x)).collect(Collectors.toList());
 	}
-	
-	public Status getStatus() {
-		return Status.toEnum(this.status);
-	}
-	
+
 }
