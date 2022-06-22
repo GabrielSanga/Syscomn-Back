@@ -85,15 +85,10 @@ public class AnimalChipResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PostMapping(value="/relatorios", produces = "application/text")
-	public ResponseEntity<String> dowloadRelatorioParam(HttpServletRequest request, @RequestBody AnimalReport animalReport) throws Exception{
-		
-		Map<String,Object> params = new HashMap<String, Object>();
-		
-		params.put("RACA", animalReport.getRaca());
-		
-		
-		byte[] pdf = reportService.gerarRelatorio("relAnimal", params, request.getServletContext());
+	@GetMapping(value="/relatorios", produces = "application/text")
+	public ResponseEntity<String> dowloadRelatorio(HttpServletRequest request) throws Exception{
+		byte[] pdf = reportService.gerarRelatorio("relAnimal", new HashMap() , 
+				request.getServletContext());
 		
 		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
 		

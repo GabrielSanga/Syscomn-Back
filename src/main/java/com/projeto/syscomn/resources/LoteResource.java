@@ -129,9 +129,6 @@ public class LoteResource {
 		
 		Map<String,Object> params = new HashMap<String, Object>();
 		
-		params.put("NRO_LOTE", loteReport.getNroLote());
-		
-		
 		byte[] pdf = reportService.gerarRelatorio("relLote", params, request.getServletContext());
 		
 		String base64Pdf = "data:application/pdf;base64," + Base64.encodeBase64String(pdf);
