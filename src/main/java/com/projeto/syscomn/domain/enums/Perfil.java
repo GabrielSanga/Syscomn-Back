@@ -2,7 +2,7 @@ package com.projeto.syscomn.domain.enums;
 
 public enum Perfil {
 
-	ADMIN(0, "ROLE_ADMIN"), FUNCIONARIO(1, "ROLE_FUNCIONARIO");
+	DIRETOR(0, "ROLE_DIRETOR"), ADMIN(1, "ROLE_ADMIN"), FUNCIONARIO(2, "ROLE_FUNCIONARIO");
 	
 	private Integer codigo;
 	private String descricao;

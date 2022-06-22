@@ -40,6 +40,7 @@ public class AdministradorDTO extends PessoaDTO{
 		this.observacaoPessoa = pAdministador.getObservacaoPessoa();
 		this.userName = pAdministador.getUserName();
 		this.senha = pAdministador.getSenha();
+		this.fotoPessoa = pAdministador.getFotoPessoa();
 		this.tipoPessoa = pAdministador.getTipoPessoa();
 		this.dtaAdmissao = pAdministador.getDtaAdmissao();
 		this.dtaDemissao= pAdministador.getDtaDemissao();

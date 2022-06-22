@@ -73,6 +73,8 @@ public class FuncionarioService {
 			}
 			//Realizando a criptografia da senha
 			oFuncionario.setSenha(encoder.encode(oFuncionario.getSenha()));
+		}else {
+			
 		}
 
 		return oFuncionario;			

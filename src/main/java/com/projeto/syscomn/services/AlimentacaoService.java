@@ -54,6 +54,11 @@ public class AlimentacaoService {
 		Alimentacao oAlimentacao = null;
 		
 		if(pAlimentacaoDTO.getTipoAlimentacao().equalsIgnoreCase("A")) {
+			AnimalChip oAnimal = animalChipRepository.findById(pAlimentacaoDTO.getIdAnimalChip()).get();
+			
+			oAnimal.setCustoFinal(oAnimal.getCustoFinal() + pAlimentacaoDTO.getCusto());
+			
+			animalChipRepository.save(oAnimal);
 			
 			oAlimentacao =  alimentacaoRepository.save(newAlimentacao(pAlimentacaoDTO));
 			
@@ -64,12 +69,19 @@ public class AlimentacaoService {
 			Integer qtdAnimaisLote = oLoteDTO.getLstAnimais().size();
 			
 			Integer QtdAlimentacaoUnica = pAlimentacaoDTO.getQuantidade() / qtdAnimaisLote;
+			Double custoRatiado = pAlimentacaoDTO.getCusto() / qtdAnimaisLote;
 				
 			for (AnimalChipDTO oAnimalChip : oLoteDTO.getLstAnimais()) {
 				pAlimentacaoDTO.setIdAnimalChip(oAnimalChip.getIdAnimalChip());
 				pAlimentacaoDTO.setQuantidade(QtdAlimentacaoUnica);
 				
 				oAlimentacao = alimentacaoRepository.save(newAlimentacao(pAlimentacaoDTO));
+				
+				AnimalChip oAnimal = animalChipRepository.findById(oAnimalChip.getIdAnimalChip()).get();
+				
+				oAnimal.setCustoFinal(oAnimal.getCustoFinal() + custoRatiado);
+				
+				animalChipRepository.save(oAnimal);
 			}
 		}
 		

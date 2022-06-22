@@ -39,7 +39,7 @@ public class AdministradorService {
 	}
 
 	public Administrador create(@Valid AdministradorDTO pAdministradorDTO) {
-		return administradorRepository.save(newAdministrador(pAdministradorDTO));
+		return administradorRepository.save(newAdministrador(pAdministradorDTO, false));
 	}
 	
 	public Administrador update(@Valid AdministradorDTO oAdministradorDTO, Integer id) {
@@ -47,7 +47,7 @@ public class AdministradorService {
 		
 		Administrador oAdministrador = findById(oAdministradorDTO.getIdPessoa());
 		
-		oAdministrador = newAdministrador(oAdministradorDTO);
+		oAdministrador = newAdministrador(oAdministradorDTO, true);
 		
 		return administradorRepository.save(oAdministrador);
 	}
@@ -58,19 +58,21 @@ public class AdministradorService {
 		administradorRepository.deleteById(oAdministrador.getIdPessoa());
 	}
 	
-	private Administrador newAdministrador(AdministradorDTO pAdministradorDTO) {					
+	private Administrador newAdministrador(AdministradorDTO pAdministradorDTO, boolean isUpdated) {					
 		Administrador oAdministrador = new Administrador(pAdministradorDTO);
 		
-		//Validando se login já existe no sistema
 		Optional<Pessoa> oPessoa = pessoaRepository.findByUserName(pAdministradorDTO.getUserName());
 		
-		if(oPessoa.orElse(null) != null) {
+		//Validando se login já existe no sistema
+		if(oPessoa.orElse(null) != null && oPessoa.get().getIdPessoa() != pAdministradorDTO.getIdPessoa()) {
 			throw new ObjectNotFoundException("Login já cadastrado no sistema!");
 		}
+		
+		if(!isUpdated) {
+			//Realizando a criptografia da senha
+			oAdministrador.setSenha(encoder.encode(oAdministrador.getSenha()));
+		}
 
-		//Realizando a criptografia da senha
-		oAdministrador.setSenha(encoder.encode(oAdministrador.getSenha()));
-	
 		return oAdministrador;			
 	}
 	

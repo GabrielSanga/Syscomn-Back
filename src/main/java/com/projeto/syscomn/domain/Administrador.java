@@ -1,18 +1,12 @@
 package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Entity;
-
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projeto.syscomn.domain.dtos.AdministradorDTO;
 import com.projeto.syscomn.domain.enums.Perfil;
-import com.projeto.syscomn.interfaces.CnpjGroup;
-import com.projeto.syscomn.interfaces.CpfGroup;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,17 +27,9 @@ public class Administrador extends Pessoa{
 
 	public Administrador() {
 		super();
+		super.addPerfil(Perfil.DIRETOR);
 		super.addPerfil(Perfil.ADMIN);
-	}
-	
-	public Administrador(Integer idPessoa, String nomePessoa,
-			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
-			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
-			byte[] fotoPessoa) {
-		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa);
-		super.addPerfil(Perfil.ADMIN);
+		super.addPerfil(Perfil.FUNCIONARIO);
 	}
 	
 	public Administrador(AdministradorDTO pAdministadorDTO) {
@@ -60,12 +46,15 @@ public class Administrador extends Pessoa{
 		this.observacaoPessoa = pAdministadorDTO.getObservacaoPessoa();
 		this.userName = pAdministadorDTO.getUserName();
 		this.senha = pAdministadorDTO.getSenha();
+		this.fotoPessoa = pAdministadorDTO.getFotoPessoa();
 		this.tipoPessoa = pAdministadorDTO.getTipoPessoa();
 		this.dtaAdmissao = pAdministadorDTO.getDtaAdmissao();
 		this.dtaDemissao= pAdministadorDTO.getDtaDemissao();
 		this.status = pAdministadorDTO.getStatus();
-		this.perfis = pAdministadorDTO.getPerfis();//.stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.perfis = pAdministadorDTO.getPerfis();
+		super.addPerfil(Perfil.DIRETOR);
 		super.addPerfil(Perfil.ADMIN);
+		super.addPerfil(Perfil.FUNCIONARIO);
 	}
 		
 }

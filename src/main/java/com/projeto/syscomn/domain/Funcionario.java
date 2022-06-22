@@ -1,16 +1,10 @@
 package com.projeto.syscomn.domain;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Entity;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-
 import com.projeto.syscomn.domain.dtos.FuncionarioDTO;
-import com.projeto.syscomn.interfaces.CnpjGroup;
-import com.projeto.syscomn.interfaces.CpfGroup;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,15 +27,6 @@ public class Funcionario extends Pessoa {
 		super();
 	}
 
-	public Funcionario(Integer idPessoa, String nomePessoa,
-			@CPF(groups = CpfGroup.class) @CNPJ(groups = CnpjGroup.class) String cpfCnpjPessoa, String telefonePessoa,
-			String emailPessoa, LocalDate dtaNascimentoPessoa, String enderecoPessoa, String statusPessoa, String rgPessoa,
-			String observacaoPessoa, String userName, String senha, Integer tipoPessoa, Set<Integer> perfis,
-			byte[] fotoPessoa) {
-		super(idPessoa, nomePessoa, cpfCnpjPessoa, telefonePessoa, emailPessoa, dtaNascimentoPessoa, enderecoPessoa,
-				statusPessoa, rgPessoa, observacaoPessoa, userName, senha, tipoPessoa, perfis, fotoPessoa);
-	}
-		
 	public Funcionario(FuncionarioDTO pFuncionarioDTO){
 		this.idPessoa = pFuncionarioDTO.getIdPessoa();
 		this.nomePessoa = pFuncionarioDTO.getNomePessoa();
@@ -61,7 +46,7 @@ public class Funcionario extends Pessoa {
 		this.dtaDemissao= pFuncionarioDTO.getDtaDemissao();
 		this.NIS = pFuncionarioDTO.getNIS();
 		this.status = pFuncionarioDTO.getStatus();
-		this.perfis = pFuncionarioDTO.getPerfis();//.stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.perfis = pFuncionarioDTO.getPerfis();
 	}
 
 
